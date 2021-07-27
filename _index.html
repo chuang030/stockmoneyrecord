@@ -134,7 +134,7 @@
             </div>
             <div id="profitAndLossPercentage" class="item-box">
                 <div class="item-box-title">報酬率</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLossPercentage[0] }}</li>
+                <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLossPercentage[0] }}%</li>
             </div>
         </div>
     </div>
@@ -148,6 +148,7 @@
         <p>本站取得每日股價來源為「台灣證券交換所」公佈之股價，若您發現有誤請回報錯誤~~</p>
         <p>本站所使用之網路資源大部分為免費資源，故載入時會有些許延遲請使用者見諒。</p>
         <p>由於資訊安全協議，本站獲取資料需要透過代理伺服器取得，代理伺服器因為是免費資源所以每分鐘都有請求限制，所以請不要一直重複重整。</p>
+        <p>如果顯示日期為空且市價皆為1，即代表當日未開市或該支股票停止交易</p>
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -169,7 +169,11 @@ Vue.createApp({
                     return `${day - 2}`;
                 }
             } else {
-                return `${day}`;
+                if(day < 10){
+                    return `0${day}`;
+                }else{
+                    return `${day}`;
+                }
             }
         },
         /**
@@ -279,8 +283,6 @@ Vue.createApp({
                 }
                 if (dd < 10) {
                     dd = `0${dd}`;
-                }else{
-                    dd = `${dd}`
                 }
             }
             //保留原本日期格式(查詢陣列中的index)
@@ -294,9 +296,8 @@ Vue.createApp({
          * @param {String} taiwanYear 輸入日期(yyy/mm/dd)，可不傳入，預設為今日民國日期(yyy/mm/dd)
          */
         changeDay(date, taiwanYear) {
-
             this.item.forEach(element => {
-                setTimeout( () => {
+                setTimeout(() => {
                     element.date = date;
                     let requestURL = setUrl(element.date, element.stockNo);
                     let request = new XMLHttpRequest();
