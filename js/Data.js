@@ -279,6 +279,8 @@ Vue.createApp({
                 }
                 if (dd < 10) {
                     dd = `0${dd}`;
+                }else{
+                    dd = `${dd}`
                 }
             }
             //保留原本日期格式(查詢陣列中的index)
