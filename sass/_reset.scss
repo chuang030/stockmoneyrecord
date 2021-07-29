@@ -1,0 +1,42 @@
+html,
+body,
+div,
+span,
+header,
+main,
+footer,
+nav,
+ul,
+ol,
+li,
+a,
+b,
+hr,
+p,
+strong,
+ins,
+del,
+s,
+i,
+em,
+u,
+button,
+img,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin         : 0;
+    padding        : 0;
+    box-sizing     : border-box;
+    text-decoration: none;
+    list-style     : none;
+    font-family    : "Microsoft JhengHei",sans-serif;
+    color          : inherit;
+    vertical-align : bottom;
+}
+img{
+    width: 100%;
+}

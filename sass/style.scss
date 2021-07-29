@@ -1,0 +1,37 @@
+@import "reset", "grid", "space";
+
+@media only screen and (min-width: 320px) {
+    @include phone-grid-s;
+    header{
+        nav{
+            ul{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                li{
+                    a{
+                        margin: 0.2em;
+                        padding: 0.2em;
+                        border: rgba(160, 160, 160, 255) 1px solid;
+                        border-radius: 5px;
+                        font-weight: bold;
+                        text-shadow: -1px -1px 0 white,
+                        1px -1px 0 white,
+                        -1px 1px 0 white,
+                        1px 1px 0 white,
+                        2px 2px 2px white;
+                        ;
+                        background: linear-gradient(rgba(255,255,255,255) 50%,rgba(242,242,242,255) 52%,rgba(222,222,222,255) 54%);
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+    #app{
+
+    }
+}
+@media only screen and (min-width: 1024px) {
+    @include table-grid;
+}

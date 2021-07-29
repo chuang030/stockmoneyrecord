@@ -51,14 +51,14 @@ Vue.createApp({
                     averagePrice: 177.84,
                     numberOfPiles: 260
                 },
-                {
-                    averagePrice: 281.54,
-                    numberOfPiles: 90
-                },
-                {
-                    averagePrice: 503.00,
-                    numberOfPiles: 30
-                },
+                // {
+                //     averagePrice: 281.54,
+                //     numberOfPiles: 90
+                // },
+                // {
+                //     averagePrice: 503.00,
+                //     numberOfPiles: 30
+                // },
             ],
             dataObjClass: [
                 {

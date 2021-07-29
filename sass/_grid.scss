@@ -1,0 +1,39 @@
+@mixin phone-grid-s {
+    @for $i from 1 through 12 {
+        .grid-xs-#{$i} {
+            width: calc(100% / 12 * #{$i});
+        }
+    }
+}
+
+@mixin phone-grid {
+    @for $i from 1 through 12 {
+        .grid-s-#{$i} {
+            width: calc(100% / 12 * #{$i});
+        }
+    }
+}
+
+@mixin table-grid {
+    @for $i from 1 through 12 {
+        .grid-m-#{$i} {
+            width: calc(100% / 12 * #{$i});
+        }
+    }
+}
+
+@mixin desk-grid {
+    @for $i from 1 through 12 {
+        .grid-l-#{$i} {
+            width: calc(100% / 12 * #{$i});
+        }
+    }
+}
+
+@mixin tv-grid {
+    @for $i from 1 through 12 {
+        .grid-xl-#{$i} {
+            width: calc(100% / 12 * #{$i});
+        }
+    }
+}
