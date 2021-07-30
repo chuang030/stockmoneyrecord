@@ -2,36 +2,91 @@
 
 @media only screen and (min-width: 320px) {
     @include phone-grid-s;
-    header{
-        nav{
-            ul{
-                display: flex;
-                flex-wrap: wrap;
+
+    @mixin menu-btn-style {
+        margin       : 0.2em;
+        padding      : 0.2em;
+        min-width    : 120px;
+        border       : rgba(160, 160, 160, 255) 1px solid;
+        border-radius: 5px;
+        font-weight  : bold;
+        text-align   : center;
+        text-shadow  :
+            -0.75px -0.75px 0 white,
+            0.75px -0.75px 0 white,
+            -0.75px 0.75px 0 white,
+            0.75px 0.75px 0 white,
+            2px 2px 2px white,
+        ;
+        background: linear-gradient(rgba(255, 255, 255, 255) 50%, rgba(242, 242, 242, 255) 52%, rgba(222, 222, 222, 255) 54%);
+        box-shadow: 1px 1px 2px rgb(156, 156, 156);
+    }
+
+    body {
+        background-color: rgb(218, 218, 218);
+    }
+
+    header {
+        nav {
+            margin          : 0.5em;
+            padding         : 0.5em;
+            border-radius   : 5px;
+            background-color: white;
+            display         : flex;
+            flex-wrap       : wrap;
+            justify-content : center;
+            position        : relative;
+
+            .nav-title {
+                width        : 100%;
+                margin       : 0 2em;
+                border-bottom: rgb(243, 65, 155) 1px solid;
+
+                p {
+                    font-weight: bold;
+                }
+            }
+
+            span {
+                position: absolute;
+                left    : 20px;
+                top     : 10px;
+
+                img {
+                    max-width: 20px;
+                }
+            }
+
+            ul {
+                margin-top     : 0.5em;
+                display        : flex;
+                flex-wrap      : wrap;
                 justify-content: center;
-                li{
-                    a{
-                        margin: 0.2em;
-                        padding: 0.2em;
-                        border: rgba(160, 160, 160, 255) 1px solid;
-                        border-radius: 5px;
-                        font-weight: bold;
-                        text-shadow: -1px -1px 0 white,
-                        1px -1px 0 white,
-                        -1px 1px 0 white,
-                        1px 1px 0 white,
-                        2px 2px 2px white;
-                        ;
-                        background: linear-gradient(rgba(255,255,255,255) 50%,rgba(242,242,242,255) 52%,rgba(222,222,222,255) 54%);
-                        display: inline-block;
+
+                li {
+                    a {
+                        @include menu-btn-style;
+                        display : inline-block;
+                        position: relative;
+
+                        span {
+                            position: absolute;
+                            left    : 3px;
+                            top     : 1px;
+
+                            img {
+                                max-width: 25px;
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    #app{
 
-    }
+    #app {}
 }
+
 @media only screen and (min-width: 1024px) {
     @include table-grid;
 }

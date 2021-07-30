@@ -282,7 +282,42 @@ img {
   .grid-xs-12 {
     width: calc(100% / 12 * 12);
   }
+  body {
+    background-color: #dadada;
+  }
+  header nav {
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative;
+  }
+  header nav .nav-title {
+    width: 100%;
+    margin: 0 2em;
+    border-bottom: #f3419b 1px solid;
+  }
+  header nav .nav-title p {
+    font-weight: bold;
+  }
+  header nav span {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+  }
+  header nav span img {
+    max-width: 20px;
+  }
   header nav ul {
+    margin-top: 0.5em;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -295,13 +330,26 @@ img {
   header nav ul li a {
     margin: 0.2em;
     padding: 0.2em;
+    min-width: 120px;
     border: #a0a0a0 1px solid;
     border-radius: 5px;
     font-weight: bold;
-    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white, 2px 2px 2px white;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), color-stop(52%, #f2f2f2), color-stop(54%, #dedede));
     background: linear-gradient(white 50%, #f2f2f2 52%, #dedede 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
     display: inline-block;
+    position: relative;
+  }
+  header nav ul li a span {
+    position: absolute;
+    left: 3px;
+    top: 1px;
+  }
+  header nav ul li a span img {
+    max-width: 25px;
   }
 }
 
