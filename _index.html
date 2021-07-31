@@ -103,80 +103,91 @@
         </div>
 
     </header>
-    <div id="app" class="c">
-        <div class="search-box">
-            <h4>日期查詢：</h4>
-            <input type="text" v-model="selectToday">
-            <a href="#" @click.prevent="toDate(selectToday)">查詢</a>
-            <p>輸入格式為：yyy/mm/dd</p>
-        </div>
-        <div class="state-box">
-            <div class="state-box-title">
-                <h4 v-if="fullDateTW === ''">目前查詢日期：{{selectToday}}</h4>
-                <h4 v-else>目前查詢日期：{{fullDateTW}}</h4>
-                <p>資料請求結果：<span>{{ hintState }}</span></p>
-                <p style="color: lightpink;">{{ hintMessage }}</p>
+    <div id="wrapper" class="wrapper">
+        <div id="app" class="c">
+            <div class="top-box">
+                <div class="top-box-title-icon">
+                    <img src="images/topBox/titleIcon.png" alt="">
+                </div>
+                <div class="search-box">
+                    <h4>日期查詢：</h4>
+                    <input type="text" v-model="selectToday">
+                    <a href="#" @click.prevent="toDate(selectToday)">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+                <!-- <p>輸入格式為：yyy/mm/dd</p> -->
             </div>
-        </div>
-        <div class="content">
-            <div id="date" class="item-box">
-                <div class="item-box-title">名稱</div>
-                <li v-for="(item, key) in item">{{ item.sName }}</li>
-            </div>
-            <div id="date" class="item-box">
-                <div class="item-box-title">編號</div>
-                <li v-for="(item, key) in item">{{ item.stockNo }}</li>
-            </div>
-            <div id="date" class="item-box">
-                <div class="item-box-title">日期</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.date[0] }}</li>
-            </div>
-            <div id="marketPrice" class="item-box">
-                <div class="item-box-title">市價</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.marketPrice[0] }}</li>
-            </div>
-            <div id="averagePrice" class="item-box">
-                <div class="item-box-title">均價</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.averagePrice[0] }}</li>
-            </div>
-            <div id="numberOfPiles" class="item-box">
-                <div class="item-box-title">股數</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.numberOfPiles[0] }}</li>
-            </div>
-            <div id="marketValue" class="item-box">
-                <div class="item-box-title">市值</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.marketValue[0] }}</li>
-            </div>
-            <div id="carryingCosts" class="item-box">
-                <div class="item-box-title">持有成本</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.carryingCosts[0] }}</li>
-            </div>
-            <div id="anticipatedRevenue" class="item-box">
-                <div class="item-box-title">預估收入</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.anticipatedRevenue[0] }}</li>
-            </div>
-            <div id="profitAndLoss" class="item-box">
-                <div class="item-box-title">應負損益</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLoss[0] }}</li>
-            </div>
-            <div id="profitAndLossPercentage" class="item-box">
-                <div class="item-box-title">報酬率</div>
-                <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLossPercentage[0] }}%</li>
+            <div class="content">
+                <div class="state-box">
+                    <div class="state-box-title">
+                        <h4 v-if="fullDateTW === ''">目前查詢日期：{{selectToday}}</h4>
+                        <h4 v-else>目前查詢日期：{{fullDateTW}}</h4>
+                        <p>資料請求結果：<span>{{ hintState }}</span></p>
+                        <p style="color: lightpink;">{{ hintMessage }}</p>
+                    </div>
+                </div>
+                <div id="date" class="item-box">
+                    <div class="item-box-title">名稱</div>
+                    <li v-for="(item, key) in item">{{ item.sName }}</li>
+                </div>
+                <div id="date" class="item-box">
+                    <div class="item-box-title">編號</div>
+                    <li v-for="(item, key) in item">{{ item.stockNo }}</li>
+                </div>
+                <div id="date" class="item-box">
+                    <div class="item-box-title">日期</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.date[0] }}</li>
+                </div>
+                <div id="marketPrice" class="item-box">
+                    <div class="item-box-title">市價</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.marketPrice[0] }}</li>
+                </div>
+                <div id="averagePrice" class="item-box">
+                    <div class="item-box-title">均價</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.averagePrice[0] }}</li>
+                </div>
+                <div id="numberOfPiles" class="item-box">
+                    <div class="item-box-title">股數</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.numberOfPiles[0] }}</li>
+                </div>
+                <div id="marketValue" class="item-box">
+                    <div class="item-box-title">市值</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.marketValue[0] }}</li>
+                </div>
+                <div id="carryingCosts" class="item-box">
+                    <div class="item-box-title">持有成本</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.carryingCosts[0] }}</li>
+                </div>
+                <div id="anticipatedRevenue" class="item-box">
+                    <div class="item-box-title">預估收入</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.anticipatedRevenue[0] }}</li>
+                </div>
+                <div id="profitAndLoss" class="item-box">
+                    <div class="item-box-title">應負損益</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLoss[0] }}</li>
+                </div>
+                <div id="profitAndLossPercentage" class="item-box">
+                    <div class="item-box-title">報酬率</div>
+                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLossPercentage[0] }}%</li>
+                </div>
+                <div class="hint-box">
+                    <p>請點擊下方的<span>「Request temporary access to the demo server」</span>按鈕後再按<span>「繼續」</span></p>
+                </div>
+                <iframe src="https://cors-anywhere.herokuapp.com/" frameborder="0"></iframe>
+                <button type="button">繼續</button>
+                <div class="affirm-box">
+                    <p>本站使用之計算公式為「元大證券」計算公式，若經本站計算後與您實際金額有落差，請以您APP內之金額為準，本站金額勤提供參考。</p>
+                    <p>本站取得每日股價來源為「台灣證券交換所」公佈之股價，若您發現有誤請回報錯誤~~</p>
+                    <p>本站所使用之網路資源大部分為免費資源，故載入時會有些許延遲請使用者見諒。</p>
+                    <p>由於資訊安全協議，本站獲取資料需要透過代理伺服器取得，代理伺服器因為是免費資源所以每分鐘都有請求限制，所以請不要一直重複重整。</p>
+                    <p>如果顯示日期為空且市價皆為1，即代表當日未開市或該支股票停止交易</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="hint-box">
-        <p>請點擊下方的<span>「Request temporary access to the demo server」</span>按鈕後再按<span>「繼續」</span></p>
-    </div>
-    <iframe src="https://cors-anywhere.herokuapp.com/" frameborder="0"></iframe>
-    <button type="button">繼續</button>
-    <div class="affirm-box">
-        <p>本站使用之計算公式為「元大證券」計算公式，若經本站計算後與您實際金額有落差，請以您APP內之金額為準，本站金額勤提供參考。</p>
-        <p>本站取得每日股價來源為「台灣證券交換所」公佈之股價，若您發現有誤請回報錯誤~~</p>
-        <p>本站所使用之網路資源大部分為免費資源，故載入時會有些許延遲請使用者見諒。</p>
-        <p>由於資訊安全協議，本站獲取資料需要透過代理伺服器取得，代理伺服器因為是免費資源所以每分鐘都有請求限制，所以請不要一直重複重整。</p>
-        <p>如果顯示日期為空且市價皆為1，即代表當日未開市或該支股票停止交易</p>
-    </div>
+
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://unpkg.com/vue@next"></script>
@@ -187,17 +198,17 @@
 <script type="text/javascript" src="js/Data.js"></script>
 
 <script>
-const navOpenBtn = document.getElementById("nav-open-btn");
-const navBar =  document.getElementById("nav-bar");
-const navCloseBtn =  document.getElementById("nav-close-btn");
+    const navOpenBtn = document.getElementById("nav-open-btn");
+    const navBar = document.getElementById("nav-bar");
+    const navCloseBtn = document.getElementById("nav-close-btn");
 
-navOpenBtn.addEventListener("click",function(){
-    navBar.style.transform =  "scale(1)";
-})
+    navOpenBtn.addEventListener("click", function () {
+        navBar.style.transform = "scale(1)";
+    })
 
-navCloseBtn.addEventListener("click",function(){
-    navBar.style.transform =  "scale(0)";
-})
+    navCloseBtn.addEventListener("click", function () {
+        navBar.style.transform = "scale(0)";
+    })
 
 </script>
 

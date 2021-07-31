@@ -2,9 +2,9 @@
 
 @media only screen and (min-width: 320px) {
     @include phone-grid-s;
-    $themeColor : rgb(243, 65, 155);
+    $themeColor: rgb(243, 65, 155);
 
-    @mixin menu-btn-style {
+    @mixin theme-btn-style {
         margin       : 0.2em;
         padding      : 0.2em;
         min-width    : 120px;
@@ -24,26 +24,26 @@
     }
 
     body {
-        background-color: rgb(218, 218, 218);
-        position        : relative;
+        // background-color: rgb(218, 218, 218);
+        position: relative;
 
         header {
             position: relative;
 
             .nav-open-btn {
-                @include menu-btn-style;
-                position: absolute;
-                top: 0%;
-                right: 0%;
+                @include theme-btn-style;
+                position       : fixed;
+                top            : 0%;
+                right          : 0%;
                 min-width      : 30px;
                 max-width      : 30px;
                 height         : 30px;
                 padding        : 0.4em;
-                color: $themeColor;
+                color          : $themeColor;
                 display        : flex;
                 justify-content: center;
                 align-items    : center;
-                cursor: pointer;
+                cursor         : pointer;
             }
 
             .nav-bar {
@@ -53,13 +53,15 @@
                 left           : 0%;
                 display        : flex;
                 justify-content: center;
-                transform: scale(0);
-                transition: all 250ms ease;
+                transform      : scale(0);
+                transition     : all 250ms ease;
 
                 nav {
                     max-width       : 414px;
                     margin          : 0.5em;
                     padding         : 0.5em;
+                    border       : rgba(160, 160, 160, 255) 1px solid;
+                    box-shadow: 1px 1px 2px rgb(156, 156, 156);
                     border-radius   : 5px;
                     background-color: white;
                     display         : flex;
@@ -95,7 +97,7 @@
 
                         li {
                             a {
-                                @include menu-btn-style;
+                                @include theme-btn-style;
                                 display : inline-block;
                                 position: relative;
 
@@ -115,14 +117,88 @@
             }
         }
 
+        .wrapper {
 
+            #app {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow: hidden;
+
+                .top-box {
+                    margin-top               : 0.2em;
+                    width                    : 70%;
+                    max-width: 250px;
+                    background-color         : rgb(239, 239, 239);
+                    border-radius            : 25px;
+                    border-top-left-radius   : 90px;
+                    border-bottom-left-radius: 90px;
+                    position                 : fixed;
+                    top                      : 0%;
+                    right                    : 40px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+
+                    .top-box-title-icon{
+                        position: absolute;
+                        top: 0%;
+                        left: 2.5%;
+                        img{
+                            width: 45%;
+                        }
+                    }
+
+                    .search-box {
+                        position       : relative;
+                        display        : flex;
+                        flex-wrap      : wrap;
+                        justify-content: flex-end;
+                        align-items    : center;
+
+                        h4 {
+                            display: inline-block;
+                        }
+
+                        input {
+                            width        : 30%;
+                            max-width    : 75px;
+                            min-width    : 70px;
+                            border       : white;
+                            border-radius: 10px;
+                            box-shadow: 1px 1px 2px rgb(156, 156, 156);
+                        }
+
+                        a {
+                            @include theme-btn-style;
+                            margin         : 0;
+                            padding        : 0.4em;
+                            min-width      : 0px;
+                            color          : $themeColor;
+                            border-radius  : 50%;
+                            justify-content: center;
+                            align-items    : center;
+                            display        : inline-flex;
+                            transform      : scale(0.8);
+                        }
+                    }
+                }
+
+                .content {
+                    margin-top: 35px;
+                    width: 80%;
+                    .state-box {
+
+                        .state-box-title {
+
+                        }
+                    }
+                }
+            }
+        }
     }
-
-
-
-    #app {}
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
     @include table-grid;
 }
