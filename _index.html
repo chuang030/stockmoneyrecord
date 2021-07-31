@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>錢錢紀錄</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        referrerpolicy="no-referrer" />
     <!-- <style>
         * {
             margin: 0;
@@ -77,19 +79,29 @@
 </head>
 
 <body>
+
     <header>
-        <nav>
-            <div class="nav-title"><span><img src="images/menu/icon/TitleIcon.png" alt=""></span><p>メニュー</p></div>
-            <ul>
-                <li><a href="#"><span><img src="images/menu/icon/Home.png" alt=""></span>　首頁</a></li>
-                <li><a href="#"><span><img src="images/menu/icon/MoneyRecord.png" alt=""></span>　庫存</a></li>
-                <li><a href="#"><span><img src="images/menu/icon/Account.png" alt=""></span>　分帳戶</a></li>
-                <li><a href="#"><span><img src="images/menu/icon/ProfitAndLoss.png" alt=""></span>　損益明細</a></li>
-                <li><a href="#"><span><img src="images/menu/icon/ProfitAndLossCalculation.png" alt=""></span>　損益計算</a></li>
-                <li><a href="#"><span><img src="images/menu/icon/Description.png" alt=""></span>　本站說明</a></li>
-                <li id="nav-close"><a href="#">關閉</a></li>
-            </ul>
-        </nav>
+        <div id="nav-open-btn" class="nav-open-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div id="nav-bar" class="nav-bar">
+            <nav>
+                <div class="nav-title"><span><img src="images/menu/icon/TitleIcon.png" alt=""></span>
+                    <p>メニュー</p>
+                </div>
+                <ul>
+                    <li><a href="#"><span><img src="images/menu/icon/Home.png" alt=""></span>　首頁</a></li>
+                    <li><a href="#"><span><img src="images/menu/icon/MoneyRecord.png" alt=""></span>　庫存</a></li>
+                    <li><a href="#"><span><img src="images/menu/icon/Account.png" alt=""></span>　分帳戶</a></li>
+                    <li><a href="#"><span><img src="images/menu/icon/ProfitAndLoss.png" alt=""></span>　損益明細</a></li>
+                    <li><a href="#"><span><img src="images/menu/icon/ProfitAndLossCalculation.png"
+                                    alt=""></span>　損益計算</a></li>
+                    <li><a href="#"><span><img src="images/menu/icon/Description.png" alt=""></span>　本站說明</a></li>
+                    <li id="nav-close-btn"><a href="#">關閉</a></li>
+                </ul>
+            </nav>
+        </div>
+
     </header>
     <div id="app" class="c">
         <div class="search-box">
@@ -173,7 +185,20 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="js/StockCalculation.js"></script>
 <script type="text/javascript" src="js/Data.js"></script>
+
 <script>
+const navOpenBtn = document.getElementById("nav-open-btn");
+const navBar =  document.getElementById("nav-bar");
+const navCloseBtn =  document.getElementById("nav-close-btn");
+
+navOpenBtn.addEventListener("click",function(){
+    navBar.style.transform =  "scale(1)";
+})
+
+navCloseBtn.addEventListener("click",function(){
+    navBar.style.transform =  "scale(0)";
+})
+
 </script>
 
 </html>

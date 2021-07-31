@@ -284,8 +284,61 @@ img {
   }
   body {
     background-color: #dadada;
+    position: relative;
   }
-  header nav {
+  body header {
+    position: relative;
+  }
+  body header .nav-open-btn {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #a0a0a0 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), color-stop(52%, #f2f2f2), color-stop(54%, #dedede));
+    background: linear-gradient(white 50%, #f2f2f2 52%, #dedede 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    min-width: 30px;
+    max-width: 30px;
+    height: 30px;
+    padding: 0.4em;
+    color: #f3419b;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    cursor: pointer;
+  }
+  body header .nav-bar {
+    width: 100vw;
+    position: fixed;
+    top: 30%;
+    left: 0%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-transition: all 250ms ease;
+    transition: all 250ms ease;
+  }
+  body header .nav-bar nav {
+    max-width: 414px;
     margin: 0.5em;
     padding: 0.5em;
     border-radius: 5px;
@@ -300,23 +353,23 @@ img {
             justify-content: center;
     position: relative;
   }
-  header nav .nav-title {
+  body header .nav-bar nav .nav-title {
     width: 100%;
     margin: 0 2em;
     border-bottom: #f3419b 1px solid;
   }
-  header nav .nav-title p {
+  body header .nav-bar nav .nav-title p {
     font-weight: bold;
   }
-  header nav span {
+  body header .nav-bar nav span {
     position: absolute;
     left: 20px;
     top: 10px;
   }
-  header nav span img {
+  body header .nav-bar nav span img {
     max-width: 20px;
   }
-  header nav ul {
+  body header .nav-bar nav ul {
     margin-top: 0.5em;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -327,7 +380,7 @@ img {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  header nav ul li a {
+  body header .nav-bar nav ul li a {
     margin: 0.2em;
     padding: 0.2em;
     min-width: 120px;
@@ -343,12 +396,12 @@ img {
     display: inline-block;
     position: relative;
   }
-  header nav ul li a span {
+  body header .nav-bar nav ul li a span {
     position: absolute;
     left: 3px;
-    top: 1px;
+    top: 1.5px;
   }
-  header nav ul li a span img {
+  body header .nav-bar nav ul li a span img {
     max-width: 25px;
   }
 }

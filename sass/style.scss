@@ -2,6 +2,7 @@
 
 @media only screen and (min-width: 320px) {
     @include phone-grid-s;
+    $themeColor : rgb(243, 65, 155);
 
     @mixin menu-btn-style {
         margin       : 0.2em;
@@ -24,65 +25,100 @@
 
     body {
         background-color: rgb(218, 218, 218);
-    }
+        position        : relative;
 
-    header {
-        nav {
-            margin          : 0.5em;
-            padding         : 0.5em;
-            border-radius   : 5px;
-            background-color: white;
-            display         : flex;
-            flex-wrap       : wrap;
-            justify-content : center;
-            position        : relative;
+        header {
+            position: relative;
 
-            .nav-title {
-                width        : 100%;
-                margin       : 0 2em;
-                border-bottom: rgb(243, 65, 155) 1px solid;
-
-                p {
-                    font-weight: bold;
-                }
-            }
-
-            span {
+            .nav-open-btn {
+                @include menu-btn-style;
                 position: absolute;
-                left    : 20px;
-                top     : 10px;
-
-                img {
-                    max-width: 20px;
-                }
+                top: 0%;
+                right: 0%;
+                min-width      : 30px;
+                max-width      : 30px;
+                height         : 30px;
+                padding        : 0.4em;
+                color: $themeColor;
+                display        : flex;
+                justify-content: center;
+                align-items    : center;
+                cursor: pointer;
             }
 
-            ul {
-                margin-top     : 0.5em;
+            .nav-bar {
+                width          : 100vw;
+                position       : fixed;
+                top            : 30%;
+                left           : 0%;
                 display        : flex;
-                flex-wrap      : wrap;
                 justify-content: center;
+                transform: scale(0);
+                transition: all 250ms ease;
 
-                li {
-                    a {
-                        @include menu-btn-style;
-                        display : inline-block;
-                        position: relative;
+                nav {
+                    max-width       : 414px;
+                    margin          : 0.5em;
+                    padding         : 0.5em;
+                    border-radius   : 5px;
+                    background-color: white;
+                    display         : flex;
+                    flex-wrap       : wrap;
+                    justify-content : center;
+                    position        : relative;
 
-                        span {
-                            position: absolute;
-                            left    : 3px;
-                            top     : 1px;
+                    .nav-title {
+                        width        : 100%;
+                        margin       : 0 2em;
+                        border-bottom: $themeColor 1px solid;
 
-                            img {
-                                max-width: 25px;
+                        p {
+                            font-weight: bold;
+                        }
+                    }
+
+                    span {
+                        position: absolute;
+                        left    : 20px;
+                        top     : 10px;
+
+                        img {
+                            max-width: 20px;
+                        }
+                    }
+
+                    ul {
+                        margin-top     : 0.5em;
+                        display        : flex;
+                        flex-wrap      : wrap;
+                        justify-content: center;
+
+                        li {
+                            a {
+                                @include menu-btn-style;
+                                display : inline-block;
+                                position: relative;
+
+                                span {
+                                    position: absolute;
+                                    left    : 3px;
+                                    top     : 1.5px;
+
+                                    img {
+                                        max-width: 25px;
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
+
     }
+
+
 
     #app {}
 }
