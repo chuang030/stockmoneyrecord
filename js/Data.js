@@ -51,17 +51,18 @@ Vue.createApp({
                     averagePrice: 177.84,
                     numberOfPiles: 260
                 },
-                // {
-                //     averagePrice: 281.54,
-                //     numberOfPiles: 90
-                // },
-                // {
-                //     averagePrice: 503.00,
-                //     numberOfPiles: 30
-                // },
+                {
+                    averagePrice: 281.54,
+                    numberOfPiles: 90
+                },
+                {
+                    averagePrice: 503.00,
+                    numberOfPiles: 30
+                },
             ],
             dataObjClass: [
                 {
+                    sName: "",
                     date: [],
                     marketPrice: [],
                     averagePrice: [],
@@ -73,6 +74,7 @@ Vue.createApp({
                     profitAndLossPercentage: [],
                 },
                 {
+                    sName: "",
                     date: [],
                     marketPrice: [],
                     averagePrice: [],
@@ -84,6 +86,7 @@ Vue.createApp({
                     profitAndLossPercentage: [],
                 },
                 {
+                    sName: "",
                     date: [],
                     marketPrice: [],
                     averagePrice: [],
@@ -95,6 +98,7 @@ Vue.createApp({
                     profitAndLossPercentage: [],
                 },
                 {
+                    sName: "",
                     date: [],
                     marketPrice: [],
                     averagePrice: [],
@@ -247,6 +251,9 @@ Vue.createApp({
          * @param {String} todayStr 
          */
         arrFun(index = 0, todayStr) {
+            let sName = "";
+            sName = this.item[index].sName;
+            this.dataObjClass[index].sName = sName;
             let datePush = [];
             //todayStr有傳入時取得傳入日期在陣列(撈出資料的陣列)中的位置，反之以今日日期在陣列中的位置
             todayStr = (typeof todayStr !== "undefined") ? this.todayIndex = this.itemDataFun(this.dataOriginalObject, 0).indexOf(todayStr) : this.todayIndex = this.itemDataFun(this.dataOriginalObject, 0).indexOf(this.selectToday);
@@ -329,7 +336,7 @@ Vue.createApp({
 
                         }
                     }
-                }, 500 * element.no);
+                }, 300 * element.no);
 
             });
         }

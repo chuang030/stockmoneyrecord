@@ -116,10 +116,20 @@ class StockCalculation {
     /**
      * 取得手續費，取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
      * 如果手續費金額小於1(即為0)則以最低手續費計算，最低手續費為1元新台幣
-     * @returns 手續費
+     * @returns 買進手續費
      */
-    getCharge() {
+    getBuyCharge() {
         let charge = Math.floor((this.getCostPrice() * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
+        return charge == 0 ? 1 : charge;
+    }
+
+    /**
+     * 取得手續費，取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
+     * 如果手續費金額小於1(即為0)則以最低手續費計算，最低手續費為1元新台幣
+     * @returns 賣出手續費
+     */
+    getSellCharge() {
+        let charge = Math.floor((this.getMarketValue() * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
         return charge == 0 ? 1 : charge;
     }
 
@@ -189,7 +199,7 @@ class StockCalculation {
      * @returns 成交均價
      */
     getAveragePrice() {
-        return Math.round(((Math.round(((this.getCostPrice() + this.getCharge(this.chargeDiscount)) * 100) / 100)) / this.numberOfPiles) * 100) / 100;
+        return Math.round(((Math.round(((this.getCostPrice() + this.getBuyCharge()) * 100) / 100)) / this.numberOfPiles) * 100) / 100;
     }
 
     /**
@@ -197,7 +207,7 @@ class StockCalculation {
      * @returns 持有成本
      */
     getCarryingCosts() {
-        return Math.round(((this.getCostPrice() + this.getCharge(this.chargeDiscount)) * 100) / 100);
+        return Math.round(((this.getCostPrice() + this.getBuyCharge()) * 100) / 100);
     }
 
     /**
@@ -205,7 +215,7 @@ class StockCalculation {
      * @returns 預估收入
      */
     getAnticipatedRevenue() {
-        return Math.round(((this.getMarketValue() - this.getCharge(this.chargeDiscount) - this.getTaxes(this.marketPrice, this.type)) * 100) / 100);
+        return Math.round(((this.getMarketValue() - this.getSellCharge() - this.getTaxes()) * 100) / 100);
     }
 
     /**
@@ -254,14 +264,17 @@ class StockCalculation {
 // console.log(c.getCostPrice());
 // console.log(c.getProfitAndLoss());
 
-// let c1 = new StockCalculation();
+// let c1 = new StockCalculation(204.5,198.5,20,6,0);
 // c1.setCost(83.0);
 // c1.setMarketPrice(90.5);
 // c1.setNumberOfPiles(50);
 // c1.setType(0);
 // c1.setChargeDiscount(6);
 // console.log(c1.getCostPrice());
-// console.log(c1.getCharge());
+// console.log(c1.getBuyCharge());
+// console.log(c1.getSellCharge());
+// console.log(c1.getTaxes());
 // console.log(c1.getCarryingCosts());
+// console.log(c1.getAnticipatedRevenue());
 // console.log(c1.getProfitAndLoss());
-// console.log(c1.);
+// console.log(c1.getProfitAndLossPercentage());

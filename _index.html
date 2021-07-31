@@ -105,7 +105,7 @@
     </header>
     <div id="wrapper" class="wrapper">
         <div id="app" class="c">
-            <div class="top-box">
+            <div id="top-box" class="top-box">
                 <div class="top-box-title-icon">
                     <img src="images/topBox/titleImg.webp" alt="">
                 </div>
@@ -118,7 +118,7 @@
                 </div>
                 <!-- <p>輸入格式為：yyy/mm/dd</p> -->
             </div>
-            <div class="content">
+            <div id="content" class="content">
                 <div class="state-box">
                     <div class="state-box-title">
                         <h4 v-if="fullDateTW === ''">目前查詢日期：{{selectToday}}</h4>
@@ -127,11 +127,43 @@
                         <p style="color: lightpink;">{{ hintMessage }}</p>
                     </div>
                 </div>
-                <div id="date" class="item-box">
-                    <div class="item-box-title">名稱</div>
-                    <li v-for="(item, key) in item">{{ item.sName }}</li>
+                <div id="stock-box" class="stock-box">
+                    <div class="stock-item-class">
+                        <div class="stock-class-label1">
+                            <div class="stock-item-box-title">名稱</div>
+                            <div class="stock-item-box-title">市/均價</div>
+                            <div class="stock-item-box-title">股數</div>
+                            <div class="stock-item-box-title">損益</div>
+                        </div>
+                        <div class="stock-class-content">
+                            <div class="item-class" v-for="(item, key) in dataObjClass">
+                                <div id="stock-name" class="item-box">
+                                    <li>{{ item.sName }}</li>
+                                </div>
+                                <div id="marketPrice" class="item-box">
+                                    <li>{{ item.marketPrice[0] }}</li>
+                                    <li>{{ item.averagePrice[0] }}</li>
+                                </div>
+                                <div id="numberOfPiles" class="item-box">
+                                    <li>{{ item.numberOfPiles[0] }}</li>
+                                </div>
+                                <div id="profitAndLoss" class="item-box">
+                                    <li v-if="item.profitAndLoss[0] > 0" style="color: red;">{{ item.profitAndLoss[0] }}</li>
+                                    <li v-else style="color:limegreen;">{{ item.profitAndLoss[0] }}</li>
+                                    <li v-if="item.profitAndLossPercentage[0] > 0" style="color: red;">{{ item.profitAndLossPercentage[0] }}%</li>
+                                    <li v-else style="color: limegreen;">{{ item.profitAndLossPercentage[0] }}%</li>
+                                </div>
+                            </div>
+                                
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
-                <div id="date" class="item-box">
+
+                <!-- <div id="date" class="item-box">
                     <div class="item-box-title">編號</div>
                     <li v-for="(item, key) in item">{{ item.stockNo }}</li>
                 </div>
@@ -139,18 +171,9 @@
                     <div class="item-box-title">日期</div>
                     <li v-for="(itemList, key) in dataObjClass">{{ itemList.date[0] }}</li>
                 </div>
-                <div id="marketPrice" class="item-box">
-                    <div class="item-box-title">市價</div>
-                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.marketPrice[0] }}</li>
-                </div>
-                <div id="averagePrice" class="item-box">
-                    <div class="item-box-title">均價</div>
-                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.averagePrice[0] }}</li>
-                </div>
-                <div id="numberOfPiles" class="item-box">
-                    <div class="item-box-title">股數</div>
-                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.numberOfPiles[0] }}</li>
-                </div>
+
+
+
                 <div id="marketValue" class="item-box">
                     <div class="item-box-title">市值</div>
                     <li v-for="(itemList, key) in dataObjClass">{{ itemList.marketValue[0] }}</li>
@@ -162,15 +185,8 @@
                 <div id="anticipatedRevenue" class="item-box">
                     <div class="item-box-title">預估收入</div>
                     <li v-for="(itemList, key) in dataObjClass">{{ itemList.anticipatedRevenue[0] }}</li>
-                </div>
-                <div id="profitAndLoss" class="item-box">
-                    <div class="item-box-title">應負損益</div>
-                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLoss[0] }}</li>
-                </div>
-                <div id="profitAndLossPercentage" class="item-box">
-                    <div class="item-box-title">報酬率</div>
-                    <li v-for="(itemList, key) in dataObjClass">{{ itemList.profitAndLossPercentage[0] }}%</li>
-                </div>
+                </div> -->
+
                 <div class="hint-box">
                     <p>請點擊下方的<span>「Request temporary access to the demo server」</span>按鈕後再按<span>「繼續」</span></p>
                 </div>
@@ -198,17 +214,26 @@
 <script type="text/javascript" src="js/Data.js"></script>
 
 <script>
+    const wrapper = document.getElementById("wrapper");
+    const appBox = document.getElementById("app");
+    const content = document.getElementById("content");
     const navOpenBtn = document.getElementById("nav-open-btn");
     const navBar = document.getElementById("nav-bar");
     const navCloseBtn = document.getElementById("nav-close-btn");
+    const topBox = document.getElementById("top-box");
 
     navOpenBtn.addEventListener("click", function () {
         navBar.style.transform = "scale(1)";
+        navBar.style.zIndex = "100";
+        wrapper.style.filter = "brightness(0.5)";
     })
 
     navCloseBtn.addEventListener("click", function () {
         navBar.style.transform = "scale(0)";
+        navBar.style.zIndex = "0";
+        wrapper.style.filter = "brightness(1)";
     })
+
 
 
 </script>
