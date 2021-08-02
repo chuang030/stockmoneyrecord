@@ -14,31 +14,31 @@ Vue.createApp({
         return {
             hintState: "",
             hintMessage: "",
-            selectToday: this.getToday(),
-            fullDateTW: "",
+            selectToday: this.getFullToday(),
+            fullDateTW: this.getFullTodayTW(),
             item: [
                 {
                     no: 0,
                     sName: "中鋼",
-                    date: this.getFullToday(),
+                    date: this.getFullTodayTW(),
                     stockNo: 2002
                 },
                 {
                     no: 1,
                     sName: "長榮",
-                    date: this.getFullToday(),
+                    date: this.getFullTodayTW(),
                     stockNo: 2603
                 },
                 {
                     no: 2,
                     sName: "萬海",
-                    date: this.getFullToday(),
+                    date: this.getFullTodayTW(),
                     stockNo: 2615
                 },
                 {
                     no: 3,
                     sName: "聯詠",
-                    date: this.getFullToday(),
+                    date: this.getFullTodayTW(),
                     stockNo: 3034
                 }
             ],
@@ -137,76 +137,62 @@ Vue.createApp({
             return new Date(date).getDay();
         },
         /**
-         * 日期塞選方法(跳六、日)
-         * @param {Number|String} date 
-         * @param {String} fullDate 
-         * @returns 跳躍後日期(dd)
-         */
-        jumpDay(date, fullDate) {
-            let today = new Date();
-            //預留星期變數
-            let todayDay = 0;
-            //預留日變數
-            let day = 0;
-            if (typeof date !== "undefined") {
-                //指定為傳入的日
-                day = Number(date);
-                //取得傳入日期為星期幾
-                todayDay = this.judgeDay(fullDate)
-            } else {
-                //指定為今天的日
-                day = today.getDate();
-                //取得今天為星期幾
-                todayDay = today.getDay();
-            }
-            //判斷是否為星期六、日，是的話推算回星期五的日期(dd)
-            if (todayDay == 6) {
-                if (day - 1 < 10) {
-                    return `0${day - 1}`;
-                } else {
-                    return `${day - 1}`;
-                }
-            } else if (todayDay == 0) {
-                if (day - 2 < 10) {
-                    return `0${day - 2}`;
-                } else {
-                    return `${day - 2}`;
-                }
-            } else {
-                if(day < 10){
-                    return `0${day}`;
-                }else{
-                    return `${day}`;
-                }
-            }
-        },
-        /**
          * 取得當前民國完整日期(yyy/mm/dd)，並設定this.selectToday值
          * @returns 民國完整日期(yyy/mm/dd)
          */
         getToday() {
             let today = new Date();
             let month = "";
+            let day = "";
             if (today.getMonth() + 1 < 10) {
                 month = `0${today.getMonth() + 1}`
             } else {
                 month = today.getMonth() + 1;
             }
-            this.selectToday = `${today.getFullYear() - 1911}/${month}/${this.jumpDay()}`;
-            return `${today.getFullYear() - 1911}/${month}/${this.jumpDay()}`;
+            if (today.getDate() < 10) {
+                day = `0${today.getDate()}`;
+            } else {
+                day = `${today.getDate()}`;
+            }
+            this.selectToday = `${today.getFullYear()}-${month}-${day}`;
+            return `${today.getFullYear()}-${month}-${day}`;
+        },
+        /**
+         * 日期字串格式轉換yyyy-mm-dd => yyyymmdd
+         * @param {String} str 
+         * @returns 轉換後日期字串(yyyymmdd)
+         */
+        changeStr(str = "") {
+            return str.replace(/-/g, "");
+        },
+        /**
+         * 日期字串格式轉換yyyy-mm-dd => yyy/mm/dd
+         * @param {String} str 
+         * @returns 轉換後日期字串(yyy/mm/dd)
+         */
+        changeStrTW(str = "") {
+            str = str.replace(/-/g, "/");
+            str = str.replace(str.substring(0, 4), str.substring(0, 4) - 1911);
+            return str;
         },
         /**
          * 取得當前西元完整日期(yyyy/mm/dd)，並設定this.selectFullToday值
          */
         getFullToday() {
-            let today = new Date();
-            let month = "";
-            if (today.getMonth() + 1 < 10) {
-                month = `0${today.getMonth() + 1}`
-            } else {
-                month = today.getMonth() + 1;
-            }
-            this.selectFullToday = `${today.getFullYear()}${month}${this.jumpDay()}`;
+            let today = this.getToday();
+            today = today.replace(/-/g, "");
+            this.selectFullToday = today;
+            return today;
+        },
+        /**
+         * 取得當前西元完整日期(yyyy/mm/dd)，並設定this.selectFullToday值
+         */
+        getFullTodayTW() {
+            let today = this.getToday();
+            today = today.replace(/-/g, "/");
+            today = today.replace(today.substring(0, 4), today.substring(0, 4) - 1911);
+            this.selectFullToday = today;
+            return today;
         },
         /**
          * 股票計算方法
@@ -256,46 +242,13 @@ Vue.createApp({
             this.dataObjClass[index].sName = sName;
             let datePush = [];
             //todayStr有傳入時取得傳入日期在陣列(撈出資料的陣列)中的位置，反之以今日日期在陣列中的位置
-            todayStr = (typeof todayStr !== "undefined") ? this.todayIndex = this.itemDataFun(this.dataOriginalObject, 0).indexOf(todayStr) : this.todayIndex = this.itemDataFun(this.dataOriginalObject, 0).indexOf(this.selectToday);
+            todayStr = (typeof todayStr !== undefined) ? this.todayIndex = this.itemDataFun(this.dataOriginalObject, 0).indexOf(todayStr) : this.todayIndex = this.itemDataFun(this.dataOriginalObject, 0).indexOf(this.selectToday);
             //將指定位置日期撈出
             datePush.push(this.itemDataFun(this.dataOriginalObject, 0)[this.todayIndex]);
             //在指定位置推送撈出之日期
             this.dataObjClass[index].date = datePush;
             //取得資料傳入股票計算方法
             this.stockCalculation(this.itemDataFun(this.dataOriginalObject, 6), this.account[index].averagePrice, this.account[index].numberOfPiles, 6, 0, index);
-        },
-        /**
-         * 民國日期轉換西元日期(yyy/mm/dd) => (yyyymmdd)
-         * @param {String} toDate 傳入民國日期(yyy/mm/dd)
-         */
-        toDate(toDate) {
-            let yyyy = Number(toDate.substring(0, 3)) + 1911;
-            let mm = Number(toDate.substring(4, 6));
-            let dd = Number(toDate.substring(7));
-            if (mm < 10) {
-                mm = `0${mm}`;
-            }
-            if (dd < 10) {
-                dd = `0${dd}`;
-            }
-            let fullDate = `${yyyy}/${mm}/${dd}`;
-            //判斷取得日期為星期幾，並判斷是否跳過，回傳判斷後的日期(日)
-            dd = this.jumpDay(dd, fullDate);
-            if (Number(dd) < 1) {
-                let newDate = new Date(yyyy, Number(mm) - 1, dd);
-                mm = newDate.getMonth() + 1;
-                dd = newDate.getDate();
-                if (mm < 10) {
-                    mm = `0${mm}`;
-                }
-                if (dd < 10) {
-                    dd = `0${dd}`;
-                }
-            }
-            //保留原本日期格式(查詢陣列中的index)
-            let fullDateTW = `${yyyy - 1911}/${mm}/${dd}`;
-            this.fullDateTW = fullDateTW;
-            this.changeDay(`${yyyy}${mm}${dd}`, fullDateTW);
         },
         /**
          * 更換查詢日期，並送出請求後執行後續資料處理
@@ -314,14 +267,28 @@ Vue.createApp({
                     request.onreadystatechange = () => {
                         if (request.readyState === 4 && request.status === 200) {
                             this.dataOriginalObject = request.response.data;
-                            iframe.style.display = "none";
-                            button.style.display = "none";
+                            if (this.dataOriginalObject !== undefined) {
+                                this.hintState = "成功";
+                                this.hintMessage = "";
+                                if(this.itemDataFun(this.dataOriginalObject, 0).indexOf(taiwanYear) === -1){
+                                    this.hintState = "成功，但是~";
+                                    this.hintMessage = "今天似乎沒開盤喔~";
+                                }
+                            } else {
+                                if (request.response.stat === "很抱歉，沒有符合條件的資料!") {
+                                    this.hintState = "成功，但是~";
+                                    this.hintMessage = "今天似乎還沒收盤或沒開盤喔~";
+                                }
+                                if (request.response.stat === "查詢日期大於今日，請重新查詢!") {
+                                    this.hintState = "成功，但是~";
+                                    this.hintMessage = "我沒辦法預測未來~"
+                                }
+                            }
+                            hintBox.style.display = "none";
                             this.arrFun(element.no, taiwanYear);
-                            this.hintState = "成功";
                         }
                         if (request.readyState === 4 && request.status === 429) {
-                            iframe.style.display = "none";
-                            button.style.display = "none";
+                            hintBox.style.display = "none";
                             this.hintState = "失敗";
                             this.hintMessage = "過多請求";
                         }
@@ -342,14 +309,15 @@ Vue.createApp({
         }
     },
     mounted() {
-        this.changeDay();
+        this.changeDay(this.getFullToday(), this.getFullTodayTW());
     }
 }).mount('#app')
-// console.log(request.status);
+
 const app = document.getElementById("app");
 const iframe = document.getElementsByTagName("iframe")[0];
-const button = document.getElementsByTagName("button")[0];
-button.addEventListener("click", function () {
+const hintBoxContinueBtn = document.getElementById("hint-box-continue-btn");
+const hintBox = document.getElementById("hint-box");
+hintBoxContinueBtn.addEventListener("click", function () {
     history.go(0);
 })
 
