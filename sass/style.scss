@@ -219,6 +219,22 @@
                         background-image: url(../images/Box/StateBox/bg.webp);
                         background-position: center;
                         background-size: cover;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: flex-start;
+                        align-items: center;
+
+                        .state-box-title{
+                            width: 80%;
+                        }
+
+                        .state-img{
+                            width: 20%;
+
+                            img{
+
+                            }
+                        }
                     }
 
                     .stock-box {
@@ -325,9 +341,10 @@
                     .affirm-box {
                         @include theme-box-style;
                         line-height: 1.5em;
-                        background-image: url();
-                        background-position: top;
-                        background-size: cover;
+                        background-image: url(../images/Box/AffirmBox/bg.webp);
+                        background-position: center;
+                        background-size: 80%;
+                        background-repeat: no-repeat;
 
                         p {
                             padding    : 0.5em 0;

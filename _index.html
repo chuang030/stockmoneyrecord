@@ -126,6 +126,11 @@
                         <p>資料請求結果：<span>{{ hintState }}</span></p>
                         <p style="color: rgb(243, 65, 155);">{{ hintMessage }}</p>
                     </div>
+                    <div class="state-img">
+                        <img src="images/Box/StateBox/ok.webp" alt="" v-if="hintState === '成功'">
+                        <img src="images/Box/StateBox/on.webp" alt="" v-else-if="hintState === '失敗'">
+                        <img src="images/Box/StateBox/ex.webp" alt="" v-else>
+                    </div>
                 </div>
                 <div id="stock-box" class="stock-box">
                     <div class="stock-item-class">

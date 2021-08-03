@@ -272,7 +272,7 @@ Vue.createApp({
                                 this.hintMessage = "";
                                 if(this.itemDataFun(this.dataOriginalObject, 0).indexOf(taiwanYear) === -1){
                                     this.hintState = "成功，但是~";
-                                    this.hintMessage = "今天似乎沒開盤喔~";
+                                    this.hintMessage = "今天似乎還沒收盤或沒開盤喔~";
                                 }
                             } else {
                                 if (request.response.stat === "很抱歉，沒有符合條件的資料!") {
