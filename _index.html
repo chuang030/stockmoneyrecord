@@ -111,10 +111,10 @@
                 </div> -->
                 <div class="search-box">
                     <p>日期查詢</p>
-                    <input type="date" v-model="selectToday">
-                    <a href="#" @click.prevent="changeDay(changeStr(selectToday),changeStrTW(selectToday))">
+                    <input type="date" v-model="selectToday" @change="changeDay(changeStr(selectToday),changeStrTW(selectToday))">
+                    <!-- <a href="#" @click.prevent="changeDay(changeStr(selectToday),changeStrTW(selectToday))"> 
                         <i class="fas fa-search"></i>
-                    </a>
+                    </a>-->
                 </div>
                 <!-- <p>輸入格式為：yyy/mm/dd</p> -->
             </div>

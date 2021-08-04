@@ -188,11 +188,12 @@
                         }
 
                         input {
-                            margin-left  : 0.45em;
+                            margin  : 0.4em;
                             min-width    : 140px;
                             border       : white;
                             border-radius: 10px;
                             box-shadow   : 1px 1px 2px rgb(156, 156, 156);
+                            background-color: $themeColor;
                         }
 
                         a {
@@ -230,10 +231,6 @@
 
                         .state-img{
                             width: 20%;
-
-                            img{
-
-                            }
                         }
                     }
 

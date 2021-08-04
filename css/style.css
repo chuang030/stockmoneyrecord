@@ -476,12 +476,13 @@ img {
     display: inline-block;
   }
   body .wrapper #app .top-box .search-box input {
-    margin-left: 0.45em;
+    margin: 0.4em;
     min-width: 140px;
     border: white;
     border-radius: 10px;
     -webkit-box-shadow: 1px 1px 2px #9c9c9c;
             box-shadow: 1px 1px 2px #9c9c9c;
+    background-color: #f3419b;
   }
   body .wrapper #app .top-box .search-box a {
     margin: 0.2em;
