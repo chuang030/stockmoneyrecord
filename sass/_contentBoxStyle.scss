@@ -1,0 +1,117 @@
+@mixin content-stock-style{
+    .state-box {
+        @include theme-box-display;
+        background-image   : url(../images/Box/StateBox/bg.webp);
+        background-position: center;
+        background-size    : cover;
+    
+        .state-box-title {
+            width: 80%;
+        }
+    
+        .state-img {
+            width: 20%;
+        }
+    }
+    
+    .stock-box {
+        background-image   : url(../images/Box/StockBox/bg.webp);
+        background-position: center;
+        background-size    : cover;
+    
+        .stock-item-class {
+            @include theme-box-display;
+            width: 100%;
+    
+            .stock-class-label1 {
+                @include theme-box-display;
+                width        : 100%;
+                flex-wrap    : nowrap;
+                border-bottom: $themeBorderStyle;
+    
+                .stock-item-box-title {
+                    width     : 25%;
+                    flex      : 0 0 auto;
+                    text-align: right;
+    
+                    &:nth-of-type(1) {
+                        width     : 20%;
+                        text-align: center;
+                    }
+                }
+            }
+    
+            .stock-class-content {
+                @include theme-box-display;
+                width: 100%;
+    
+                .item-class {
+                    @include theme-box-display;
+                    width        : 100%;
+                    border-bottom: $themeBorderStyle;
+    
+                    &:nth-last-of-type(1) {
+                        border-bottom: none;
+                    }
+    
+                    .item-box {
+                        @include theme-box-display;
+                        width          : 25%;
+                        flex           : 0 0 auto;
+                        justify-content: flex-end;
+    
+                        li {
+                            width     : 100%;
+                            text-align: right;
+                        }
+    
+                        &:nth-of-type(1) {
+                            width          : 20%;
+                            justify-content: center;
+    
+                            li {
+                                width     : 100%;
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .hint-box {
+    
+        p {
+    
+            span {
+                color: $themeColor;
+            }
+        }
+    
+        iframe {
+            width        : 100%;
+            height       : 200px;
+            border       : $themeBorderStyle;
+            border-radius: 5px;
+        }
+    
+        .hint-box-continue-btn {
+            @include theme-btn-style;
+            max-width: 300px;
+        }
+    }
+    
+    .affirm-box {
+        line-height        : 1.5em;
+        background-image   : url(../images/Box/AffirmBox/bg.webp);
+        background-position: center;
+        background-size    : 80%;
+        background-repeat  : no-repeat;
+    
+        p {
+            padding    : 0.5em 0;
+            text-indent: 2em;
+        }
+    }
+}

@@ -1,0 +1,109 @@
+$themeColor      : rgb(243, 65, 155);
+$themeBorderColor: rgba(210, 210, 210, 255);
+$themeBorderStyle: $themeBorderColor 1px solid;
+
+@mixin theme-btn-style {
+    margin       : 0.2em;
+    padding      : 0.2em;
+    min-width    : 120px;
+    border       : rgba(160, 160, 160, 255) 1px solid;
+    border-radius: 5px;
+    font-weight  : bold;
+    text-align   : center;
+    text-shadow  :
+        -0.75px -0.75px 0 white,
+        0.75px -0.75px 0 white,
+        -0.75px 0.75px 0 white,
+        0.75px 0.75px 0 white,
+        2px 2px 2px white,
+    ;
+    background: linear-gradient(rgba(255, 255, 255, 255) 50%, rgba(242, 242, 242, 255) 52%, rgba(222, 222, 222, 255) 54%);
+    box-shadow: 1px 1px 2px rgb(156, 156, 156);
+}
+
+@mixin theme-box-style {
+    margin       : 0.2em;
+    padding      : 0.2em;
+    min-width    : 120px;
+    border       : $themeBorderStyle;
+    border-radius: 5px;
+    text-shadow  :
+        -0.75px -0.75px 0 white,
+        0.75px -0.75px 0 white,
+        -0.75px 0.75px 0 white,
+        0.75px 0.75px 0 white,
+        2px 2px 2px white,
+    ;
+    background-color: white;
+}
+
+@mixin theme-box-display {
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: flex-start;
+    align-items    : center;
+}
+
+body {
+    overflow: hidden;
+    position: relative;
+
+    .wrapper {
+        height               : 100vh;
+        background           : url(../images/bg/bgPattern.webp);
+        background-attachment: fixed;
+        display              : flex;
+        flex-wrap            : wrap;
+        justify-content      : center;
+        transition           : all 200ms ease;
+        overflow-y           : scroll;
+
+        &::-webkit-scrollbar {
+            width: 0.25em;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $themeColor;
+        }
+
+        .top-box {
+            @include theme-box-display;
+            margin-top               : 0.2em;
+            width                    : 90%;
+            max-width                : 250px;
+            background-color         : white;
+            border-radius            : 25px;
+            border-top-left-radius   : 90px;
+            border-bottom-left-radius: 90px;
+            border                   : $themeBorderStyle;
+            position                 : fixed;
+            top                      : 0%;
+            right                    : 40px;
+            justify-content          : flex-end;
+            z-index                  : 10;
+        }
+
+        .content {
+            margin-top: 40px;
+            width     : 90%;
+        }
+    }
+}
+
+.app {
+    max-width      : 568px;
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: center;
+    overflow       : hidden;
+}
+
+
+
+.theme-style-box {
+    @include theme-box-style;
+}

@@ -1,0 +1,92 @@
+header {
+    position: relative;
+
+    .nav-open-btn {
+        @include theme-btn-style;
+        margin-right: 0.4em;
+        position       : fixed;
+        top            : 0%;
+        right          : 0%;
+        min-width      : 30px;
+        max-width      : 30px;
+        height         : 30px;
+        padding        : 0.4em;
+        color          : $themeColor;
+        display        : flex;
+        justify-content: center;
+        align-items    : center;
+        cursor         : pointer;
+        z-index        : 1;
+    }
+
+    .nav-bar {
+        width          : 100vw;
+        position       : fixed;
+        top            : 30%;
+        left           : 0%;
+        display        : flex;
+        justify-content: center;
+        transform      : scale(0);
+        transition     : all 200ms ease;
+        z-index        : 10;
+
+        nav {
+            max-width       : 414px;
+            margin          : 0.5em;
+            padding         : 0.5em;
+            border          : $themeBorderColor 1px solid;
+            box-shadow      : 1px 1px 2px rgb(156, 156, 156);
+            border-radius   : 5px;
+            background-color: white;
+            display         : flex;
+            flex-wrap       : wrap;
+            justify-content : center;
+            position        : relative;
+
+            .nav-title {
+                width        : 100%;
+                margin       : 0 2em;
+                border-bottom: $themeColor 1px solid;
+
+                p {
+                    font-weight: bold;
+                }
+            }
+
+            span {
+                position: absolute;
+                left    : 20px;
+                top     : 10px;
+
+                img {
+                    max-width: 20px;
+                }
+            }
+
+            ul {
+                margin-top     : 0.5em;
+                display        : flex;
+                flex-wrap      : wrap;
+                justify-content: center;
+
+                li {
+                    a {
+                        @include theme-btn-style;
+                        display : inline-block;
+                        position: relative;
+
+                        span {
+                            position: absolute;
+                            left    : 3px;
+                            top     : 1.5px;
+
+                            img {
+                                max-width: 25px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

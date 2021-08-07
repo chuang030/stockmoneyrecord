@@ -1,0 +1,33 @@
+@mixin top-box-stock-style {
+    .top-box-title-icon {
+        position: absolute;
+        top     : 15%;
+        left    : 5%;
+
+        img {
+            width: 20%;
+        }
+    }
+
+    .search-box {
+        @include theme-box-display;
+        position       : relative;
+        justify-content: flex-end;
+
+        h4 {
+            display: inline-block;
+        }
+
+        input {
+            margin       : 0.4em;
+            min-width    : 140px;
+            border       : white;
+            border-radius: 10px;
+            box-shadow   : 1px 1px 2px rgb(156, 156, 156);
+
+            &:focus {
+                outline-color: $themeColor;
+            }
+        }
+    }
+}
