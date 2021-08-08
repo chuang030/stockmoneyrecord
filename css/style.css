@@ -310,7 +310,7 @@ body .wrapper .top-box {
 
 body .wrapper .content {
   margin-top: 40px;
-  width: 90%;
+  width: 90vw;
 }
 
 .app {
@@ -324,6 +324,11 @@ body .wrapper .content {
       -ms-flex-pack: center;
           justify-content: center;
   overflow: hidden;
+}
+
+select:focus,
+input:focus {
+  outline-color: #f3419b;
 }
 
 .theme-style-box {
@@ -717,6 +722,447 @@ header .nav-bar nav ul li a span img {
   body .wrapper .app .content .affirm-box p {
     padding: 0.5em 0;
     text-indent: 2em;
+  }
+  body .wrapper .app .content .title-box {
+    width: 100%;
+    text-align: center;
+    border-bottom: #d2d2d2 1px solid;
+  }
+  body .wrapper .app .content .setting-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #d2d2d2 1px solid;
+    border-radius: 5px;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
+    background-color: white;
+  }
+  body .wrapper .app .content .setting-box .set-model-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+  }
+  body .wrapper .app .content .setting-box .set-model-box .set-model-box-item {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #a0a0a0 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), color-stop(52%, #f2f2f2), color-stop(54%, #dedede));
+    background: linear-gradient(white 50%, #f2f2f2 52%, #dedede 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0;
+    min-width: 0;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    cursor: pointer;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  body .wrapper .app .content .setting-box .set-model-box .set-model-box-item .model-item-btn {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #a0a0a0 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), color-stop(52%, #f2f2f2), color-stop(54%, #dedede));
+    background: linear-gradient(white 50%, #f2f2f2 52%, #dedede 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    margin: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    min-width: 0;
+    border: none;
+  }
+  body .wrapper .app .content .setting-box .set-model-box .set-model-box-item .model-item-btn.active {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #e2056f 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 #e2056f, 0.75px -0.75px 0 #e2056f, -0.75px 0.75px 0 #e2056f, 0.75px 0.75px 0 #e2056f, 2px 2px 2px #e2056f;
+    color: white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #ffb5ce), color-stop(52%, #f2f2f2), color-stop(54%, #ff4783));
+    background: linear-gradient(#ffb5ce 50%, #f2f2f2 52%, #ff4783 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    margin: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    min-width: 0;
+  }
+  body .wrapper .app .content .setting-box .set-model-box .set-model-box-item #simple {
+    border-radius: 5px 0 0 5px;
+  }
+  body .wrapper .app .content .setting-box .set-model-box .set-model-box-item #full {
+    border-radius: 0 5px 5px 0;
+  }
+  body .wrapper .app .content .setting-box .set-model-box .set-model-box-item:nth-last-of-type(1) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 25px;
+    height: 25px;
+    color: #f3419b;
+    border-radius: 50%;
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+  }
+  body .wrapper .app .content .setting-box .securities-firms-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+  }
+  body .wrapper .app .content .setting-box .securities-firms-box select {
+    margin: 0.2em;
+    padding: 0.2em;
+  }
+  body .wrapper .app .content .buy-box,
+  body .wrapper .app .content .sell-box,
+  body .wrapper .app .content .set-type-box,
+  body .wrapper .app .content .detail-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  body .wrapper .app .content .input-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  body .wrapper .app .content .input-box .input-box-class {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0.4em;
+  }
+  body .wrapper .app .content .input-box .input-box-class p {
+    display: inline;
+  }
+  body .wrapper .app .content .input-box .input-box-class input {
+    max-width: 70px;
+  }
+  body .wrapper .app .content .input-box .input-box-class .priceBtn {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #a0a0a0 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), color-stop(52%, #f2f2f2), color-stop(54%, #dedede));
+    background: linear-gradient(white 50%, #f2f2f2 52%, #dedede 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    margin-right: 1em;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    min-width: 0;
+    color: #f3419b;
+    font-size: 1.15em;
+    line-height: 0;
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  body .wrapper .app .content .input-box .input-box-class .priceBtn:active {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #e2056f 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 #e2056f, 0.75px -0.75px 0 #e2056f, -0.75px 0.75px 0 #e2056f, 0.75px 0.75px 0 #e2056f, 2px 2px 2px #e2056f;
+    color: white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #ffb5ce), color-stop(52%, #f2f2f2), color-stop(54%, #ff4783));
+    background: linear-gradient(#ffb5ce 50%, #f2f2f2 52%, #ff4783 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    margin-right: 1em;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    min-width: 0;
+    font-size: 1.15em;
+    line-height: 0;
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+  body .wrapper .app .content .discount-and-type-box {
+    width: 100%;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    padding-top: 0.5em;
+    width: 100%;
+    border-bottom: #d2d2d2 1px solid;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class p {
+    width: 100%;
+    font-weight: bold;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class .set-type-box-class-item {
+    width: 50%;
+    max-width: 250px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class .set-type-box-class-item label {
+    padding: 0.5em 0;
+    width: 40%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    line-height: 1em;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class .set-type-box-class-item input {
+    width: 20%;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class .set-type-box-class-item select {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    width: 90%;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 1em 0;
+    width: 100%;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class form .form-item {
+    width: 30%;
+    max-width: 80px;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class form label[class=label-checkbox] {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #a0a0a0 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 white, 0.75px -0.75px 0 white, -0.75px 0.75px 0 white, 0.75px 0.75px 0 white, 2px 2px 2px white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, white), color-stop(52%, #f2f2f2), color-stop(54%, #dedede));
+    background: linear-gradient(white 50%, #f2f2f2 52%, #dedede 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+    width: 100%;
+    min-width: 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    cursor: pointer;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class form label.active {
+    margin: 0.2em;
+    padding: 0.2em;
+    min-width: 120px;
+    border: #e2056f 1px solid;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -0.75px -0.75px 0 #e2056f, 0.75px -0.75px 0 #e2056f, -0.75px 0.75px 0 #e2056f, 0.75px 0.75px 0 #e2056f, 2px 2px 2px #e2056f;
+    color: white;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #ffb5ce), color-stop(52%, #f2f2f2), color-stop(54%, #ff4783));
+    background: linear-gradient(#ffb5ce 50%, #f2f2f2 52%, #ff4783 54%);
+    -webkit-box-shadow: 1px 1px 2px #9c9c9c;
+            box-shadow: 1px 1px 2px #9c9c9c;
+  }
+  body .wrapper .app .content .discount-and-type-box .set-type-box-class form input[type=radio] {
+    display: none;
+  }
+  body .wrapper .app .content .type-detail-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    max-width: 250px;
+    line-height: 2em;
+  }
+  body .wrapper .app .content .type-detail-box h4 {
+    width: 100%;
+  }
+  body .wrapper .app .content .type-detail-box p {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  body .wrapper .app .content .type-detail-box span {
+    width: 50%;
+    text-align: right;
+  }
+  body .wrapper .app .content .detail-box-class {
+    width: 50%;
+  }
+  body .wrapper .app .content .detail-box-class .detail-box-title {
+    text-align: center;
+  }
+  body .wrapper .app .content .detail-box-class .detail-box-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+  }
+  body .wrapper .app .content .detail-box-class .detail-box-item p {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    line-height: 1.5em;
   }
 }
 

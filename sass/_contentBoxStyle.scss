@@ -1,74 +1,74 @@
-@mixin content-stock-style{
+@mixin content-stock-style {
     .state-box {
         @include theme-box-display;
         background-image   : url(../images/Box/StateBox/bg.webp);
         background-position: center;
         background-size    : cover;
-    
+
         .state-box-title {
             width: 80%;
         }
-    
+
         .state-img {
             width: 20%;
         }
     }
-    
+
     .stock-box {
         background-image   : url(../images/Box/StockBox/bg.webp);
         background-position: center;
         background-size    : cover;
-    
+
         .stock-item-class {
             @include theme-box-display;
             width: 100%;
-    
+
             .stock-class-label1 {
                 @include theme-box-display;
                 width        : 100%;
                 flex-wrap    : nowrap;
                 border-bottom: $themeBorderStyle;
-    
+
                 .stock-item-box-title {
                     width     : 25%;
                     flex      : 0 0 auto;
                     text-align: right;
-    
+
                     &:nth-of-type(1) {
                         width     : 20%;
                         text-align: center;
                     }
                 }
             }
-    
+
             .stock-class-content {
                 @include theme-box-display;
                 width: 100%;
-    
+
                 .item-class {
                     @include theme-box-display;
                     width        : 100%;
                     border-bottom: $themeBorderStyle;
-    
+
                     &:nth-last-of-type(1) {
                         border-bottom: none;
                     }
-    
+
                     .item-box {
                         @include theme-box-display;
                         width          : 25%;
                         flex           : 0 0 auto;
                         justify-content: flex-end;
-    
+
                         li {
                             width     : 100%;
                             text-align: right;
                         }
-    
+
                         &:nth-of-type(1) {
                             width          : 20%;
                             justify-content: center;
-    
+
                             li {
                                 width     : 100%;
                                 text-align: center;
@@ -79,39 +79,282 @@
             }
         }
     }
-    
+
     .hint-box {
-    
+
         p {
-    
+
             span {
                 color: $themeColor;
             }
         }
-    
+
         iframe {
             width        : 100%;
             height       : 200px;
             border       : $themeBorderStyle;
             border-radius: 5px;
         }
-    
+
         .hint-box-continue-btn {
             @include theme-btn-style;
             max-width: 300px;
         }
     }
-    
+
     .affirm-box {
         line-height        : 1.5em;
         background-image   : url(../images/Box/AffirmBox/bg.webp);
         background-position: center;
         background-size    : 80%;
         background-repeat  : no-repeat;
-    
+
         p {
             padding    : 0.5em 0;
             text-indent: 2em;
         }
     }
+}
+
+@mixin content-calculation-style {
+
+    .title-box {
+        width        : 100%;
+        text-align   : center;
+        border-bottom: $themeBorderStyle;
+    }
+
+    .setting-box {
+        @include theme-box-display;
+        @include theme-box-style;
+
+        .set-model-box {
+            @include theme-box-display;
+            width: 100%;
+
+            .set-model-box-item {
+                @include theme-btn-style;
+                @include theme-box-display;
+                padding        : 0;
+                min-width      : 0;
+                user-select    : none;
+                cursor         : pointer;
+                justify-content: space-between;
+
+                .model-item-btn {
+                    @include theme-btn-style;
+                    margin    : 0;
+                    box-shadow: none;
+                    min-width : 0;
+                    border    : none;
+                }
+
+                .model-item-btn.active {
+                    @include theme-btn-style-active;
+                    margin    : 0;
+                    box-shadow: none;
+                    min-width : 0;
+                }
+
+                #simple {
+                    border-radius: 5px 0 0 5px;
+                }
+
+                #full {
+                    border-radius: 0 5px 5px 0;
+                }
+
+                &:nth-last-of-type(1) {
+                    @include theme-box-display;
+                    justify-content: center;
+                    width          : 25px;
+                    height         : 25px;
+                    color          : $themeColor;
+                    border-radius  : 50%;
+                    transform      : scale(0.8);
+                }
+            }
+        }
+
+        .securities-firms-box {
+            @include theme-box-display;
+            width: 100%;
+
+            select{
+                margin: 0.2em;
+                padding: 0.2em;
+            }
+        }
+    }
+
+    .buy-box,
+    .sell-box,
+    .set-type-box,
+    .detail-box {
+        @include theme-box-display;
+        align-items: flex-start;
+    }
+
+    .input-box {
+        @include theme-box-display;
+
+        .input-box-class {
+            @include theme-box-display;
+            padding: 0.4em;
+
+            p {
+                display: inline;
+            }
+
+            input {
+                max-width: 70px;
+            }
+
+            .priceBtn {
+                @include theme-btn-style;
+                margin-right: 1em;
+                padding     : 0;
+                width       : 20px;
+                height      : 20px;
+                min-width   : 0;
+                color       : $themeColor;
+                font-size   : 1.15em;
+                line-height : 0;
+                transform   : scale(1.2);
+
+                &:active {
+                    @include theme-btn-style-active;
+                    margin-right: 1em;
+                    padding     : 0;
+                    width       : 20px;
+                    height      : 20px;
+                    min-width   : 0;
+                    font-size   : 1.15em;
+                    line-height : 0;
+                    transform   : scale(1.2);
+                }
+            }
+        }
+    }
+
+    .discount-and-type-box {
+        width: 100%;
+
+
+
+        .set-type-box-class {
+            @include theme-box-display;
+            align-items  : flex-start;
+            padding-top  : 0.5em;
+            width        : 100%;
+            border-bottom: $themeBorderStyle;
+
+            p {
+                width      : 100%;
+                font-weight: bold;
+            }
+
+            .set-type-box-class-item {
+                width          : 50%;
+                max-width      : 250px;
+                display        : flex;
+                flex-wrap      : wrap;
+                justify-content: space-between;
+                align-items    : center;
+
+                label {
+                    padding        : 0.5em 0;
+                    width          : 40%;
+                    display        : flex;
+                    justify-content: space-between;
+                    line-height    : 1em;
+                }
+
+                input {
+                    width: 20%;
+                }
+
+                select {
+                    margin : 0.5em 0;
+                    padding: 0.5em;
+                    width  : 90%;
+                }
+            }
+
+            form {
+                @include theme-box-display;
+                padding: 1em 0;
+                width  : 100%;
+
+                .form-item {
+                    width    : 30%;
+                    max-width: 80px;
+                }
+
+                label[class=label-checkbox] {
+                    @include theme-btn-style;
+                    width          : 100%;
+                    min-width      : 0;
+                    justify-content: center;
+                    user-select    : none;
+                    cursor         : pointer;
+                }
+
+                label.active {
+                    @include theme-btn-style-active;
+                }
+
+                input[type=radio] {
+                    display: none;
+                }
+            }
+
+
+        }
+    }
+
+    .type-detail-box {
+        @include theme-box-display;
+        width      : 100%;
+        max-width  : 250px;
+        line-height: 2em;
+
+        h4 {
+            width: 100%;
+        }
+
+        p {
+            width          : 50%;
+            display        : flex;
+            justify-content: space-between;
+        }
+
+        span {
+            width     : 50%;
+            text-align: right;
+        }
+    }
+
+
+
+    .detail-box-class {
+        width: 50%;
+
+        .detail-box-title {
+            text-align: center
+        }
+
+        .detail-box-item {
+            @include theme-box-display;
+            width: 100%;
+
+            p {
+                width          : 50%;
+                display        : flex;
+                justify-content: space-between;
+                line-height    : 1.5em;
+            }
+        }
+    }
+
 }

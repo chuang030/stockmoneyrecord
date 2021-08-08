@@ -15,11 +15,248 @@
     <header></header>
     <div id="wrapper" class="wrapper">
         <div id="app" class="app">
-            <div class="top-box"></div>
-            <div id="content" class="content"></div>
+            <div class="top-box">
+            </div>
+            <div id="content" class="content">
+                <div class="setting-box">
+                    <div class="title-box">
+                        <h4>設置</h4>
+                    </div>
+                    <div id="model-box" class="set-model-box">
+                        <div class="set-model-box-item" @click="modelBoxItemIsShow()">
+                            <div id="simple" class="model-item-btn" :class="{active : modelBox.simple}">
+                                <p>簡單計算</p>
+                            </div>
+                            <div id="full" class="model-item-btn" :class="{active : modelBox.full}">
+                                <p>詳細計算</p>
+                            </div>
+                        </div>
+                        <div id="icon" class="set-model-box-item"><i class="fas fa-exclamation"></i></div>
+                    </div>
+                    <div class="securities-firms-box">
+                        <label for="securitiesFirms">選擇券商：</label><select id="securitiesFirms" name="securitiesFirms" v-model.number="securitiesFirms" @change="securitiesFirmsSelect(securitiesFirms)">
+                            <option value="0">無</option>
+                            <option value="1" selected>元大證券</option>
+                            <option value="2">國泰證券</option>
+                            <option value="3">凱基證券</option>
+                            <option value="4">永豐金證券</option>
+                            <option value="5">新光證券</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="buy-box theme-style-box">
+                    <div class="title-box">
+                        <h4>買入</h4>
+                    </div>
+                    <div class="input-box">
+                        <div class="input-box-class">
+                            <label>整股：</label><input type="number" id="buyBoardLot" v-model.number="buyBoardLot"
+                                @input="stockCalculation()">
+                            <span>張</span>
+                        </div>
+                        <div class="input-box-class">
+                            <label>零股：</label><input type="number" id="buyOddLot" v-model.number="buyOddLot"
+                                @input="stockCalculation()">
+                            <span>股</span>
+                        </div>
+                        <div class="input-box-class">
+                            <label>買價：</label><input type="number" id="sharePrice" v-model.number="sharePrice"
+                                @input="stockCalculation()">
+                            <span>元</span>
+                        </div>
+                        <div class="input-box-class" @click="stockCalculation()">
+                            <input type="button" class="priceBtn" value="+"
+                                @click="sharePrice = Math.round((sharePrice += 0.05) * 100) / 100">
+                            <input type="button" class="priceBtn" value="-"
+                                @click="sharePrice = Math.round((sharePrice -= 0.05) * 100) / 100">
+                            <input type="button" class="priceBtn" value="x" @click="buyValueClear()">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="sell-box theme-style-box">
+                    <div class="title-box">
+                        <h4>賣出</h4>
+                    </div>
+                    <div class="input-box">
+                        <div class="input-box-class">
+                            <label>賣價：</label><input type="number" id="marketCosts" v-model.number="marketCosts"
+                                @input="stockCalculation()">
+                            <span>元</span>
+                        </div>
+                        <div class="input-box-class" @click="stockCalculation()">
+                            <input type="button" class="priceBtn" value="+"
+                                @click="marketCosts = Math.round((marketCosts += 0.05) * 100) / 100">
+                            <input type="button" class="priceBtn" value="-"
+                                @click="marketCosts = Math.round((marketCosts -= 0.05) * 100) / 100">
+                            <input type="button" class="priceBtn" value="x" @click="sellValueClear()">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="set-type-box theme-style-box">
+                    <div class="title-box">
+                        <h4>手續費及交易形式</h4>
+                    </div>
+                    <div class="discount-and-type-box">
+
+                        <div id="discount-box" class="set-type-box-class">
+                            <div class="set-type-box-class-item">
+                                <p>手續費折扣</p>
+                                <select name="buy-discount" id="buy-discount" v-model.number="buyDiscount"
+                                    @change="stockCalculation()">
+                                    <option value="10">無</option>
+                                    <option value="9.5">9.5折</option>
+                                    <option value="9">9折</option>
+                                    <option value="8.5">8.5折</option>
+                                    <option value="8">8折</option>
+                                    <option value="7.5">7.5折</option>
+                                    <option value="7">7折</option>
+                                    <option value="6.5">6.5折</option>
+                                    <option value="6" selected>6折</option>
+                                    <option value="5.5">5.5折</option>
+                                    <option value="5">5折</option>
+                                    <option value="4.5">4.5折</option>
+                                    <option value="4">4折</option>
+                                    <option value="3.5">3.5折</option>
+                                    <option value="3">3折</option>
+                                    <option value="2.8">2.8折</option>
+                                    <option value="2.5">2.5折</option>
+                                    <option value="2">2折</option>
+                                    <option value="1.5">1.5折</option>
+                                    <option value="1">1折</option>
+                                </select>
+                            </div>
+                            <div class="set-type-box-class-item" v-show="this.modelBox.full">
+                                <p>最低手續費</p>
+                                <label for="Charge">整股<span>：</span></label><input type="number" id="boardLotBaseCharge"
+                                    name="boardLotBaseCharge" v-model.number="boardLotBaseCharge"
+                                    @change="stockCalculation()">
+                                <span>元</span>
+                                <label for="Charge">零股<span>：</span></label><input type="number" id="oddLottBaseCharge"
+                                    name="oddLottBaseCharge" v-model.number="oddLottBaseCharge"
+                                    @change="stockCalculation()">
+                                <span>元</span>
+                            </div>
+                        </div>
+                        <div id="stock-type" class="set-type-box-class" v-show="this.modelBox.full">
+                            <p>交易形式</p>
+                            <form name="set-type-box-form" id="set-type-box-form" @change="stockCalculation()">
+                                <div class="form-item">
+                                    <label for="commonStocks" class="label-checkbox"
+                                        :class="{active : checkboxItem.commonStocks}">普通</label>
+                                    <input type="radio" name="commonStocks" id="commonStocks" class="checkboxItem"
+                                        value="普通" v-model="stockType" @click="isCheckboxItem(0)">
+                                </div>
+                                <div class="form-item">
+                                    <label for="dayTrading" class="label-checkbox"
+                                        :class="{active : checkboxItem.dayTrading}">當沖</label>
+                                    <input type="radio" name="dayTrading" id="dayTrading" class="checkboxItem"
+                                        value="當沖" v-model="stockType" @click="isCheckboxItem(1)">
+                                </div>
+                                <div class="form-item">
+                                    <label for="exchangeTradedFunds" class="label-checkbox"
+                                        :class="{active : checkboxItem.exchangeTradedFunds}">ETF</label>
+                                    <input type="radio" name="exchangeTradedFunds" id="exchangeTradedFunds"
+                                        class="checkboxItem" value="ETF" v-model="stockType" @click="isCheckboxItem(2)">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="type-detail-box" v-show="this.modelBox.full">
+                        <h4>證券交易稅</h4>
+                        <p>普通<span>：</span></p>
+                        <span>0.3%</span>
+                        <p>當沖<span>：</span></p>
+                        <span>0.15%</span>
+                        <p>ETF<span>：</span></p>
+                        <span>0.1%</span>
+                    </div>
+                </div>
+                <div class="detail-box theme-style-box">
+                    <div class="title-box">
+                        <h4>試算明細</h4>
+                    </div>
+                    <div class="detail-box-class">
+                        <div class="detail-box-title">
+                            <h5>買入明細</h5>
+                        </div>
+                        <div id="buyCharge" class="detail-box-item">
+                            <p>手續費<span class="detail-lable">：</span></p>
+                            <p><span>{{ buyCharge }}</span></p>
+                        </div>
+                        <div id="costPrice" class="detail-box-item">
+                            <p>價金<span class="detail-lable">：</span></p>
+                            <p><span>{{ costPrice }}</span></p>
+                        </div>
+                        <div id="carryingCosts" class="detail-box-item">
+                            <p>持有成本<span class="detail-lable">：</span></p>
+                            <p><span>{{ carryingCosts }}</span></p>
+                        </div>
+                    </div>
+                    <div class="detail-box-class">
+                        <div class="detail-box-title">
+                            <h5>賣出明細</h5>
+                        </div>
+                        <div id="sellCharge" class="detail-box-item">
+                            <p>手續費<span class="detail-lable">：</span></p>
+                            <p><span>{{ sellCharge }}</span></p>
+                        </div>
+                        <div id="taxes" class="detail-box-item">
+                            <p>交易稅<span class="detail-lable">：</span></p>
+                            <p><span>{{ taxes }}</span></p>
+                        </div>
+                        <div id="marketValue" class="detail-box-item">
+                            <p>價金<span class="detail-lable">：</span></p>
+                            <p><span>{{ marketValue }}</span></p>
+                        </div>
+                        <div id="taxes" class="detail-box-item">
+                            <p>收益<span class="detail-lable">：</span></p>
+                            <p><span>{{ anticipatedRevenue }}</span></p>
+                        </div>
+                        <div id="profitAndLoss" class="detail-box-item">
+                            <p>損益<span class="detail-lable">：</span></p>
+                            <p><span>{{ profitAndLoss }}</span></p>
+                        </div>
+                        <div id="profitAndLossPercentage" class="detail-box-item">
+                            <p>報酬率<span class="detail-lable">：</span></p>
+                            <p><span>{{ profitAndLossPercentage }}%</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
+<script src="https://unpkg.com/vue@next"></script>
 <script type="text/javascript" src="../../js/control.js"></script>
+<script type="text/javascript" src="../../js/StockCalculation.js"></script>
+<script type="text/javascript" src="../../js/calculationData.js"></script>
+
+<!-- <script>
+    let formItem = document.getElementById("set-type-box-form");
+    let checkboxItem = document.getElementsByClassName("checkboxItem");
+    let labelCheckbox = document.getElementsByClassName("label-checkbox");
+    function checkFun(input) {
+        for (i = 0; i < checkboxItem.length; i++) {
+            checkboxItem[i].checked = false;
+        }
+        input.checked = true;
+        return true;
+    }
+    function checkedIsTrueIndex(obj) {
+        let arr = [];
+        for (i = 0; i < obj.length; i++) {
+            arr.push(obj[i].checked === true);
+        }
+        return arr.indexOf(true);
+    }
+    for (const iterator of checkboxItem) {
+        iterator.addEventListener("click", () => {
+            console.log(checkedIsTrueIndex(checkboxItem));
+            labelCheckbox[checkedIsTrueIndex(checkboxItem)].style.display = "none";
+        })
+    }
+</script> -->
 
 </html>

@@ -11,10 +11,12 @@
 
                 .top-box {
                     @include top-box-stock-style;
+                    @include top-box-calculation-style;
                 }
 
                 .content {
                     @include content-stock-style;
+                    @include content-calculation-style
                 }
             }
         }

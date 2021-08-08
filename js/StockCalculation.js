@@ -67,7 +67,7 @@ class StockCalculation {
      * @returns 購買價金
      */
     getCostPrice() {
-        return this.sharePrice * this.numberOfPiles;
+        return Math.round(this.sharePrice * this.numberOfPiles);
     }
 
     /**
@@ -160,8 +160,8 @@ class StockCalculation {
         let rate = 0;
         let taxes = 0;
         const typeString = {
-            commonStocks: ["Common Stocks", "common stocks", "CommonStocks", "commonstocks", "CS", "cs", "0", 0],
-            dayTrading: ["Day-Trading", "day-trading", "Day Trading", "day trading", "DayTrading", "daytrading", "Dt", "dt", "1", 1],
+            commonStocks: ["Common Stocks", "common stocks", "CommonStocks", "commonstocks", "CS", "cs", "0", "普通", 0],
+            dayTrading: ["Day-Trading", "day-trading", "Day Trading", "day trading", "DayTrading", "daytrading", "Dt", "dt", "1", "當沖", 1],
             exchangeTradedFunds: ["Exchange Traded Funds", "exchange traded funds", "ExchangeTradedFunds", "exchangetradedfunds", "ETF", "etf", "2", 2]
         };
         if (typeString.commonStocks.includes(this.type)) {
