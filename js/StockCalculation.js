@@ -5,19 +5,39 @@
 class StockCalculation {
 
     /**
-     * 股價計算類別建構子
-     * @param {Number} marketPrice 輸入市價，預設為1元
-     * @param {Number} sharePrice 輸入成交價，預設為1元
-     * @param {Number} numberOfPiles 輸入購買股數，預設為1股
-     * @param {Number} chargeDiscount 輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
-     * @param {Number|String} type 輸入股票類別，預設值為編號0：普通股票Common Stocks(縮寫CS)，輸入中文、英文全名、英文縮寫、編號皆可);，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
+     * @class 股價計算類別建構子
+     * @param {Object} valueObject 輸入市價、成交價、購買股數、手續費折扣、股票類別所構成的Object
+     * @param {Number} [valueObject.marketPrice = "1"] 輸入市價，預設為1元
+     * @param {Number} valueObject.sharePrice 輸入成交價，預設為1元
+     * @param {Number} valueObject.numberOfPiles 輸入購買股數，預設為1股
+     * @param {Number} valueObject.chargeDiscount 輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
+     * @param {Number} valueObject.meansOfTransaction 輸入交易方式(0整股、1零股)
+     * @param {Number|String} valueObject.type 輸入股票類別，預設值為編號0：普通股票Common Stocks(縮寫CS)，輸入中文、英文全名、英文縮寫、編號皆可);，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
+     * @example 
+     * //marketPrice：輸入市價，預設為1元
+     * //sharePrice：輸入成交價，預設為1元
+     * //numberOfPiles：輸入購買股數，預設為1股
+     * //chargeDiscount：輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
+     * //meansOfTransaction：輸入交易方式(0整股、1零股)
+     * //type：輸入股票類別，預設值為編號0，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
+     * let obj = 
+     *  {
+            marketPrice: 100,
+            sharePrice: 100,
+            numberOfPiles: 100,
+            chargeDiscount: 6,
+            meansOfTransaction: 0,
+            type: 0
+        }
+        let stockCalculation = new StockCalculation(obj);
      */
-     constructor(marketPrice = 1, sharePrice = 1, numberOfPiles = 1, chargeDiscount = 10, type = 0) {
-        this.marketPrice = marketPrice;
-        this.sharePrice = sharePrice;
-        this.numberOfPiles = numberOfPiles;
-        this.chargeDiscount = chargeDiscount;
-        this.type = type;
+    constructor(valueObject = { marketPrice: 1, sharePrice: 1, numberOfPiles: 1, chargeDiscount: 10, meansOfTransaction: 0, type: 0 }/*marketPrice = 1, sharePrice = 1, numberOfPiles = 1, chargeDiscount = 10, type = 0*/) {
+        this.marketPrice = valueObject.marketPrice || 1;
+        this.sharePrice = valueObject.sharePrice || 1;
+        this.numberOfPiles = valueObject.numberOfPiles || 1;
+        this.chargeDiscount = valueObject.chargeDiscount || 10;
+        this.meansOfTransaction = valueObject.meansOfTransaction || 0;
+        this.type = valueObject.type || 0;
     }
 
     /**
@@ -82,7 +102,7 @@ class StockCalculation {
      * 取得市價
      * @returns 市價
      */
-     getMarketPrice() {
+    getMarketPrice() {
         return this.marketPrice;
     }
 
@@ -105,6 +125,23 @@ class StockCalculation {
     }
 
     /**
+     * 設定交易方式(0整股、1零股)
+     * @param {Number} meansOfTransaction 
+     */
+    setMeansOfTransaction(meansOfTransaction) {
+        meansOfTransaction = (typeof meansOfTransaction !== "undefined") ? meansOfTransaction : 0;
+        this.meansOfTransaction = meansOfTransaction;
+    }
+
+    /**
+     * 取得交易方式
+     * @returns 交易方式(0整股、1零股)
+     */
+    getMeansOfTransaction() {
+        return this.meansOfTransaction;
+    }
+
+    /**
      * 設定手續費折扣
      * @param {Number} chargeDiscount 輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
      */
@@ -120,7 +157,11 @@ class StockCalculation {
      */
     getBuyCharge() {
         let charge = Math.floor((this.getCostPrice() * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
-        return charge == 0 ? 1 : charge;
+        if (this.meansOfTransaction === 0) {
+            return charge < 20 ? 20 : charge;
+        } else {
+            return charge == 0 ? 1 : charge;
+        }
     }
 
     /**
@@ -130,7 +171,11 @@ class StockCalculation {
      */
     getSellCharge() {
         let charge = Math.floor((this.getMarketValue() * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
-        return charge == 0 ? 1 : charge;
+        if (this.meansOfTransaction === 0) {
+            return charge < 20 ? 20 : charge;
+        } else {
+            return charge == 0 ? 1 : charge;
+        }
     }
 
     /**
@@ -264,15 +309,26 @@ class StockCalculation {
 // console.log(c.getCostPrice());
 // console.log(c.getProfitAndLoss());
 
-// let c1 = new StockCalculation(204.5,198.5,20,6,0);
+let obj1 = {
+    sharePrice: 1000,
+    numberOfPiles: 23,
+    marketPrice: 204.5,
+    chargeDiscount: 6,
+    // type:1
+}
+let c1 = new StockCalculation(obj1);
 // c1.setCost(83.0);
 // c1.setMarketPrice(90.5);
 // c1.setNumberOfPiles(50);
-// c1.setType(0);
+// c1.setType(2);
 // c1.setChargeDiscount(6);
 // console.log(c1.getCostPrice());
 // console.log(c1.getBuyCharge());
 // console.log(c1.getSellCharge());
+c1.setMeansOfTransaction(0)
+console.log(c1.getMeansOfTransaction());
+console.log(c1.getBuyCharge());
+console.log(c1.getType());
 // console.log(c1.getTaxes());
 // console.log(c1.getCarryingCosts());
 // console.log(c1.getAnticipatedRevenue());
