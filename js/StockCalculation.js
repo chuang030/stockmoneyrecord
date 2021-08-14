@@ -6,46 +6,87 @@ class StockCalculation {
 
     /**
      * @class 股價計算類別建構子
-     * @param {Object} valueObject 輸入市價、成交價、購買股數、手續費折扣、股票類別所構成的Object
-     * @param {Number} [valueObject.marketPrice = "1"] 輸入市價，預設為1元
-     * @param {Number} valueObject.sharePrice 輸入成交價，預設為1元
-     * @param {Number} valueObject.numberOfPiles 輸入購買股數，預設為1股
-     * @param {Number} valueObject.chargeDiscount 輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
-     * @param {Number} valueObject.meansOfTransaction 輸入交易方式(0整股、1零股)
-     * @param {Number|String} valueObject.type 輸入股票類別，預設值為編號0：普通股票Common Stocks(縮寫CS)，輸入中文、英文全名、英文縮寫、編號皆可);，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
+     * @param {Object} [valueObject] 輸入市價、成交價、購買股數、手續費折扣、股票類別所構成的Object
+     * @param {Number} [valueObject.marketPrice = 0 ] 輸入市價，預設為0元
+     * @param {Number} [valueObject.sharePrice = 0 ] 輸入成交價，預設為0元
+     * @param {Number} [valueObject.numberOfPiles = 0 ] 輸入購買股數，預設為0股
+     * @param {Number} [valueObject.boardLotLowestNumberOfPiles = 0 ] 輸入購買整股股數，預設為0股
+     * @param {Number} [valueObject.oddLotLowestNumberOfPiles = 0 ] 輸入購買零股股數，預設為0股
+     * @param {Number} [valueObject.chargeDiscount = 10 ]  輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
+     * @param {Number} [valueObject.meansOfTransaction = 0 ] 輸入交易方式(0整股、1零股)，預設為0
+     * @param {Number|String} [valueObject.type = 0 ] 輸入股票類別，預設值為編號0：普通股票Common Stocks(縮寫CS)，輸入中文、英文全名、英文縮寫、編號皆可);，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
+     * @description
+     * marketPrice：輸入市價，預設為0元
+     * 
+     * sharePrice：輸入成交價，預設為0元
+     * 
+     * numberOfPiles：輸入購買股數，預設為0股
+     * 
+     * boardLotLowestNumberOfPiles：輸入購買整股股數，預設為0股(選填)
+     * 
+     * oddLotLowestNumberOfPiles：輸入購買零股股數，預設為0股(選填)
+     * 
+     * chargeDiscount：輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
+     * 
+     * meansOfTransaction：輸入交易方式(0整股、1零股)
+     * 
+     * type：輸入股票類別，預設值為編號0
+     * 
+     * --編號0：普通股票Common Stocks(縮寫CS)
+     * 
+     * --編號1：當沖Day-Trading(縮寫DT)
+     * 
+     * --編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
      * @example 
-     * //marketPrice：輸入市價，預設為1元
-     * //sharePrice：輸入成交價，預設為1元
-     * //numberOfPiles：輸入購買股數，預設為1股
-     * //chargeDiscount：輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
-     * //meansOfTransaction：輸入交易方式(0整股、1零股)
-     * //type：輸入股票類別，預設值為編號0，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
      * let obj = 
      *  {
             marketPrice: 100,
             sharePrice: 100,
             numberOfPiles: 100,
-            chargeDiscount: 6,
+            boardLotLowestNumberOfPiles: 0,
+            oddLotLowestNumberOfPiles: 0,
+            chargeDiscount: 10,
             meansOfTransaction: 0,
+            boardLotLowestCharge: 20,
+            oddLotLowestCharge: 1,
             type: 0
         }
         let stockCalculation = new StockCalculation(obj);
      */
-    constructor(valueObject = { marketPrice: 1, sharePrice: 1, numberOfPiles: 1, chargeDiscount: 10, meansOfTransaction: 0, type: 0 }/*marketPrice = 1, sharePrice = 1, numberOfPiles = 1, chargeDiscount = 10, type = 0*/) {
-        this.marketPrice = valueObject.marketPrice || 1;
-        this.sharePrice = valueObject.sharePrice || 1;
-        this.numberOfPiles = valueObject.numberOfPiles || 1;
+    constructor(
+        valueObject =
+            {
+                marketPrice: 0,
+                sharePrice: 0,
+                numberOfPiles: 0,
+                boardLotLowestNumberOfPiles: 0,
+                oddLotLowestNumberOfPiles: 0,
+                chargeDiscount: 10,
+                meansOfTransaction: 0,
+                boardLotLowestCharge: 20,
+                oddLotLowestCharge: 1,
+                type: 0
+            }
+    ) {
+        this.marketPrice = valueObject.marketPrice || 0;
+        this.sharePrice = valueObject.sharePrice || 0;
+        this.numberOfPiles = valueObject.numberOfPiles || 0;
+        this.boardLotLowestNumberOfPiles = valueObject.boardLotLowestNumberOfPiles * 1000 || 0;
+        this.oddLotLowestNumberOfPiles = valueObject.oddLotLowestNumberOfPiles || 0;
         this.chargeDiscount = valueObject.chargeDiscount || 10;
+        this.boardLotLowestCharge = valueObject.boardLotLowestCharge || 20;
+        this.oddLotLowestCharge = valueObject.oddLotLowestCharge || 1;
         this.meansOfTransaction = valueObject.meansOfTransaction || 0;
         this.type = valueObject.type || 0;
     }
 
     /**
      * 設定成交價
+     * @description 單純輸入成交價，不區分整股或零股
      * @param {Number} sharePrice 輸入成交價
      */
     setCost(sharePrice) {
-        this.sharePrice = sharePrice;
+        this.sharePrice = sharePrice || 0;
     }
 
     /**
@@ -58,18 +99,41 @@ class StockCalculation {
 
     /**
      * 設定股數
+     * @description 單純輸入股數，不區分整股或零股
      * @param {Number} numberOfPiles 輸入購買股數
      */
     setNumberOfPiles(numberOfPiles) {
-        this.numberOfPiles = numberOfPiles;
+        this.numberOfPiles = numberOfPiles || 0;
+    }
+
+    /**
+     * 設定股數
+     * @description 區分整股及零股，分別輸入
+     * @param {Number} boardLotLowestNumberOfPiles 輸入購買股數(整股)
+     * @param {Number} oddLotLowestNumberOfPiles 輸入購買股數(零股)
+     */
+    setNumberOfPilesDetailed(boardLotLowestNumberOfPiles, oddLotLowestNumberOfPiles) {
+        this.boardLotLowestNumberOfPiles = boardLotLowestNumberOfPiles * 1000 || 0;
+        this.oddLotLowestNumberOfPiles = oddLotLowestNumberOfPiles || 0;
     }
 
     /**
      * 取得股數
+     * @description
+     * 1.自動判斷以「單純輸入股數模式」或「整股、零股分別輸入模式」
+     * 
+     * 2.單純輸入股數模式：回傳輸入股數
+     * 
+     * 3.整股、零股分別輸入模式：回傳整股、零股加總股數
      * @returns 股數
      */
     getNumberOfPiles() {
-        return this.numberOfPiles;
+        let numberOfPiles = this.boardLotLowestNumberOfPiles + this.oddLotLowestNumberOfPiles;
+        if (numberOfPiles === 0 || numberOfPiles === null) {
+            return this.numberOfPiles;
+        } else {
+            return numberOfPiles;
+        }
     }
 
     /**
@@ -87,16 +151,26 @@ class StockCalculation {
      * @returns 購買價金
      */
     getCostPrice() {
-        return Math.round(this.sharePrice * this.numberOfPiles);
+        return Math.round(this.sharePrice * this.getNumberOfPiles());
     }
 
     /**
-     * 設定市價
+     * 設定市價，單純輸入市價，不區分整股或零股
      * @param {Number} marketPrice 輸入市值
      */
     setMarketPrice(marketPrice) {
         this.marketPrice = marketPrice;
     }
+
+    /**
+     * 設定市價，區分整股及零股，分別輸入
+     * @param {Number} boardLotLowestMarketPrice 輸入市值(整股)
+     * @param {Number} oddLotLowestMarketPrice 輸入市值(零股)
+     */
+    // setMarketPriceDetailed(boardLotLowestMarketPrice, oddLotLowestMarketPrice) {
+    //     this.boardLotLowestMarketPrice = boardLotLowestMarketPrice;
+    //     this.oddLotLowestMarketPrice = oddLotLowestMarketPrice;
+    // }
 
     /**
      * 取得市價
@@ -121,12 +195,12 @@ class StockCalculation {
      * @returns 市值
      */
     getMarketValue() {
-        return Math.round(this.marketPrice * this.numberOfPiles);
+        return Math.round(this.marketPrice * this.getNumberOfPiles());
     }
 
     /**
-     * 設定交易方式(0整股、1零股)
-     * @param {Number} meansOfTransaction 
+     * 設定交易方式
+     * @param {Number} meansOfTransaction 輸入交易模式(0整股、1零股)
      */
     setMeansOfTransaction(meansOfTransaction) {
         meansOfTransaction = (typeof meansOfTransaction !== "undefined") ? meansOfTransaction : 0;
@@ -142,8 +216,35 @@ class StockCalculation {
     }
 
     /**
+     * 設定最低手續費
+     * @param {Number} boardLotLowestCharge 輸入整股最低手續費(預設20元)
+     * @param {Number} oddLotLowestCharge 輸入零股最低手續費(預設1元)
+     */
+    setLowestCharge(boardLotLowestCharge, oddLotLowestCharge) {
+        this.boardLotLowestCharge = boardLotLowestCharge;
+        this.oddLotLowestCharge = oddLotLowestCharge;
+    }
+
+    /**
+     * 取得整股或零股(以設定之股票類型取得)最低手續費
+     * @returns 整股或零股(以設定之股票類型取得)最低手續費
+     */
+    getLowestCharge() {
+        if (this.meansOfTransaction === 0) {
+            return this.boardLotLowestCharge;
+        } else {
+            return this.oddLotLowestCharge;
+        }
+
+    }
+
+    /**
      * 設定手續費折扣
-     * @param {Number} chargeDiscount 輸入手續費折扣，ex:手續費6折，輸入6，預設值為10(無折扣)
+     * @description EX：手續費6折，輸入6，預設值為10(無折扣)
+     * @param {Number} chargeDiscount 輸入手續費折扣
+     * @example
+     * //設定手續費折扣6折
+     * setChargeDiscount(6);
      */
     setChargeDiscount(chargeDiscount) {
         chargeDiscount = (typeof chargeDiscount !== "undefined") ? chargeDiscount : 10;
@@ -151,36 +252,104 @@ class StockCalculation {
     }
 
     /**
-     * 取得手續費，取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
-     * 如果手續費金額小於1(即為0)則以最低手續費計算，最低手續費為1元新台幣
-     * @returns 買進手續費
+     * 取得手續費
+     * @param {Number} price0 輸入價金或市值
+     * @param {Number} price1 輸入買價或市價
+     * @description 
+     * 1.取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
+     * 
+     * 2.分別以「單純輸入股數模式」與「整股、零股分別輸入模式」進行計算
+     * 
+     * 3.「單純輸入股數模式」下如果交易模式設為「整股」，則股數需要大於999股才會以整股手續費機算
+     * 
+     * 4.如果手續費金額小於最低手續費則以最低手續費計算
+     * 
+     * 5.如果輸入股數、買價為0，手續費為0
+     * @returns 買進/賣出手續費
      */
-    getBuyCharge() {
-        let charge = Math.floor((this.getCostPrice() * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
-        if (this.meansOfTransaction === 0) {
-            return charge < 20 ? 20 : charge;
+    chargeSelector(price0, price1) {
+        let charge = Math.floor((price0 * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
+        let boardLotLowestCharge = Math.floor((this.boardLotLowestNumberOfPiles * price1 * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
+        let oddLotLowestCharge = Math.floor((this.oddLotLowestNumberOfPiles * price1 * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
+        let numberOfPiles = this.boardLotLowestNumberOfPiles + this.oddLotLowestNumberOfPiles;
+        if (numberOfPiles === 0 || numberOfPiles === null) {
+            //用單純輸入股數方式
+            if (this.numberOfPiles !== 0 && price1 !== 0) {
+                if (this.getMeansOfTransaction() === 0 || this.getMeansOfTransaction() === null) {
+                    if (this.numberOfPiles < 1000) {
+                        this.boardLotLowestCharge = this.oddLotLowestCharge;
+                    }
+                    return charge <= this.boardLotLowestCharge ? this.boardLotLowestCharge : charge;
+                } else {
+                    return charge <= this.oddLotLowestCharge ? this.oddLotLowestCharge : charge;
+                }
+            } else {
+                return charge = 0;
+            }
         } else {
-            return charge == 0 ? 1 : charge;
+            //整股、零股分別輸入方式
+            if (this.boardLotLowestNumberOfPiles !== 0 && price1 !== 0) {
+                boardLotLowestCharge <= this.boardLotLowestCharge ? boardLotLowestCharge = this.boardLotLowestCharge : boardLotLowestCharge;
+            } else {
+                boardLotLowestCharge = 0;
+            }
+            if (this.oddLotLowestNumberOfPiles !== 0 && price1 !== 0) {
+                oddLotLowestCharge <= this.oddLotLowestCharge ? oddLotLowestCharge = this.oddLotLowestCharge : oddLotLowestCharge;
+            } else {
+                oddLotLowestCharge = 0;
+            }
+            return boardLotLowestCharge + oddLotLowestCharge;
         }
     }
 
     /**
-     * 取得手續費，取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
-     * 如果手續費金額小於1(即為0)則以最低手續費計算，最低手續費為1元新台幣
+     * 取得手續費
+     * @description 
+     * 1.取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
+     * 
+     * 2.分別以「單純輸入股數模式」與「整股、零股分別輸入模式」進行計算
+     * 
+     * 3.「單純輸入股數模式」下如果交易模式設為「整股」，則股數需要大於999股才會以整股手續費機算
+     * 
+     * 4.如果手續費金額小於最低手續費則以最低手續費計算
+     * 
+     * 5.如果輸入股數、買價為0，手續費為0
+     * @returns 買進手續費
+     */
+    getBuyCharge() {
+        return this.chargeSelector(this.getCostPrice(), this.getCost());
+    }
+
+    /**
+     * 取得手續費
+     * @description 
+     * 1.取個位數無條件捨去(買進、賣出成交價金x1.425x手續費折扣/1000)
+     * 
+     * 2.分別以「單純輸入股數模式」與「整股、零股分別輸入模式」進行計算
+     * 
+     * 3.「單純輸入股數模式」下如果交易模式設為「整股」，則股數需要大於999股才會以整股手續費機算
+     * 
+     * 4.如果手續費金額小於最低手續費則以最低手續費計算
+     * 
+     * 5.如果輸入股數、買價為0，手續費為0
      * @returns 賣出手續費
      */
     getSellCharge() {
-        let charge = Math.floor((this.getMarketValue() * (1.425 * this.chargeDiscount / 10 / 1000) * 100000) / 100000);
-        if (this.meansOfTransaction === 0) {
-            return charge < 20 ? 20 : charge;
-        } else {
-            return charge == 0 ? 1 : charge;
-        }
+        return this.chargeSelector(this.getMarketValue(), this.getMarketPrice());
     }
 
     /**
      * 設定股票類別
-     * @param {Number|String} type 輸入股票類別，預設值為編號0：普通股票Common Stocks(縮寫CS)，輸入中文、英文全名、英文縮寫、編號皆可);，編號0：普通股票Common Stocks(縮寫CS)、編號1：當沖Day-Trading(縮寫DT)、編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
+     * @param {Number|String} type 輸入股票類別，預設值為編號0：普通股票Common Stocks(縮寫CS)
+     * 
+     * @description
+     * 輸入中文、英文全名、英文縮寫、編號皆可
+     * 
+     * 編號0：普通股票Common Stocks(縮寫CS)
+     * 
+     * 編號1：當沖Day-Trading(縮寫DT)
+     * 
+     * 編號2：指數股票型基金Exchange Traded Funds(縮寫ETF)
      */
     setType(type) {
         type = (typeof type !== "undefined") ? type : 0;
@@ -196,8 +365,13 @@ class StockCalculation {
     }
 
     /**
-     * 取得股票證交稅金，取個位數無條件捨去(市價x3/1000)  
-     * 如果稅金金額小於1(即為0)則以最低稅金計算，最低稅金為1元新台幣
+     * 取得股票證交稅金
+     * @description
+     * 1.取個位數無條件捨去(市價x3/1000)
+     * 
+     * 2.如果稅金金額小於1(即為0)則以最低稅金計算，最低稅金為1元
+     * 
+     * 3.如果市價(賣價)為0，稅金為0元
      * @returns 稅金
      */
     getTaxes() {
@@ -235,20 +409,30 @@ class StockCalculation {
         if (rate === -1) {
             return "輸入錯誤";
         }
-        taxes = Math.floor((this.getMarketValue() * rate / 1000));
-        return taxes == 0 ? 1 : taxes;
+        taxes = Math.floor((this.getMarketValue() * rate / 1000))
+        taxes === 0 ? taxes = 1 : taxes;
+        return this.getMarketPrice() !== 0 ? taxes : 0;
     }
 
     /**
-     * 取得成交均價，取小數點後2位四捨五入((買進成交價金+手續費)/股數)
+     * 取得成交均價
+     * @description
+     * 1.均價：取小數點後2位四捨五入((買進成交價金+手續費)/股數)
+     * 
+     * 2.如果：購買價金、手續費、股數為0，則均價為0元
      * @returns 成交均價
      */
     getAveragePrice() {
-        return Math.round(((Math.round(((this.getCostPrice() + this.getBuyCharge()) * 100) / 100)) / this.numberOfPiles) * 100) / 100;
+        if (this.getCostPrice() + this.getBuyCharge() + this.getNumberOfPiles() !== 0) {
+            return Math.round(((Math.round(((this.getCostPrice() + this.getBuyCharge()) * 100) / 100)) / this.getNumberOfPiles()) * 100) / 100;
+        } else {
+            return 0;
+        }
     }
 
     /**
-     * 取得持有成本，取個位數四捨五入(買進成交價金+手續費)
+     * 取得持有成本
+     * @description 取個位數四捨五入(買進成交價金 + 手續費)
      * @returns 持有成本
      */
     getCarryingCosts() {
@@ -256,7 +440,8 @@ class StockCalculation {
     }
 
     /**
-     * 取得預估收入，取個位數四捨五入(市值-手續費-稅金)
+     * 取得預估收入
+     * @description 取個位數四捨五入(市值 - 手續費 - 稅金)
      * @returns 預估收入
      */
     getAnticipatedRevenue() {
@@ -264,8 +449,9 @@ class StockCalculation {
     }
 
     /**
-     * 取得應付損益(預估收入-持有成本)
-     * 取得預估收入，取個位數四捨五入(市值-手續費-稅金)
+     * 取得應付損益
+     * @description 預估收入 - 持有成本
+     * 
      * @returns 應付損益
      */
     getProfitAndLoss() {
@@ -273,12 +459,16 @@ class StockCalculation {
     }
 
     /**
-     * 取得報酬率(預估收入-持有成本)
-     * 取得預估收入，取個位數四捨五入(市值-手續費-稅金)
+     * 取得報酬率
+     * @description 預估收入 - 持有成本 / 100
      * @returns 報酬率
      */
     getProfitAndLossPercentage() {
-        return Math.round(this.getProfitAndLoss() / this.getCarryingCosts() * 100 * 100) / 100;
+        if (this.getCarryingCosts() !== 0) {
+            return Math.round(this.getProfitAndLoss() / this.getCarryingCosts() * 100 * 100) / 100;
+        } else {
+            return Infinity;
+        }
     }
 
 }
@@ -287,36 +477,14 @@ class StockCalculation {
 
 
 
-
-
-// console.log(getAveragePrice(112, 5, 6));
-// console.log(getCarryingCosts(37.75, 1000, 6));
-// console.log(getAnticipatedRevenue(40.5, 1000, 6));
-// console.log(getCharge(35.12, 50, 6));
-// console.log(getTaxes(112, 5, 6));
-// console.log(Math.floor((getPrice(260, 50) * 3 / 1000) * 1) / 1);
-// console.log(getProfitAndLoss2(35.12, 34.70, 50, 6));
-// console.log(getTaxes(21.75, 5, 0));
-// console.log(getCharge(554, 5, 6));
-// console.log(getCarryingCosts(22.60, 75, 0));
-// console.log(getAnticipatedRevenue(108, 5, 6, 0));
-// console.log(getProfitAndLoss(108, 112, 5, 6, 0));
-// console.log(getProfitAndLoss(155, 177.992, 260, 6, 0));
-// console.log(getProfitAndLoss(585, 578.44, 25, 6, 0));
-// console.log(getProfitAndLoss(30.1, 29.97, 600, 6, 0));
-// console.log(getProfitAndLossPercentage(40.5,37.75, 1000, 6, 0));
-// let c = new StockCalculation(600,554,5,6,);
-// console.log(c.getCostPrice());
-// console.log(c.getProfitAndLoss());
-
-let obj1 = {
-    sharePrice: 1000,
-    numberOfPiles: 23,
-    marketPrice: 204.5,
-    chargeDiscount: 6,
-    // type:1
-}
-let c1 = new StockCalculation(obj1);
+// let obj1 = {
+    // sharePrice: 0,
+    // numberOfPiles: 1,
+    // marketPrice: 10,
+    // chargeDiscount: 6,
+    // type: 1
+// }
+// let c1 = new StockCalculation(obj1);
 // c1.setCost(83.0);
 // c1.setMarketPrice(90.5);
 // c1.setNumberOfPiles(50);
@@ -325,11 +493,21 @@ let c1 = new StockCalculation(obj1);
 // console.log(c1.getCostPrice());
 // console.log(c1.getBuyCharge());
 // console.log(c1.getSellCharge());
-c1.setMeansOfTransaction(0)
-console.log(c1.getMeansOfTransaction());
-console.log(c1.getBuyCharge());
-console.log(c1.getType());
+// c1.setMeansOfTransaction(1)
+// c1.setCostPrice(10, 1000)
+// c1.setMarketValue(10,0)
+// c1.setNumberOfPilesDetailed(1, 10);
+// c1.setLowestCharge(18, 20)
+// console.log(c1.getLowestCharge());
+// console.log(c1.getMeansOfTransaction());
+// console.log(c1.getType());
+// console.log(c1.getNumberOfPiles());
+// console.log(c1.getCostPrice());
+// console.log(c1.getMarketPrice());
+// console.log(c1.getBuyCharge());
+// console.log(c1.getSellCharge());
 // console.log(c1.getTaxes());
+// console.log(c1.getAveragePrice());
 // console.log(c1.getCarryingCosts());
 // console.log(c1.getAnticipatedRevenue());
 // console.log(c1.getProfitAndLoss());
